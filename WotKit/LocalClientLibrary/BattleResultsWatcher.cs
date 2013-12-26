@@ -40,11 +40,6 @@ namespace LocalClientLibrary
 
             LocalClientLibrary.MyEventSource.Log.DebugMessage(json);
 
-            // Parse Json
-            // server
-            // user
-            // tank
-            // stats
             var player = BattleResultsParser.ParsePlayer(json);
             LocalClientLibrary.MyEventSource.Log.Message(string.Format("Player: parsed; AccountDBID: {0}, Name: {1}", player.AccountDBID, player.Name));
             var serverPlayer = WebApiService.PostPlayer(player).Result;

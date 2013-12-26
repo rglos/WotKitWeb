@@ -1,0 +1,45 @@
+﻿@model Web.Models.RecentBattlesModel
+
+@{
+    ViewBag.Title = "Recent Battles";
+}
+
+<h2>Recent Battles</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        @ViewBag.Message
+    </div>
+}
+else
+{
+    <h3>@Html.DisplayFor(m => m.Name) - @Html.DisplayFor(m => m.AccountDBID)</h3>
+
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Tank</th>
+                <th>Damage Dealt</th>
+                <th>Damage Received</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Battles)
+            {
+                <tr>
+                    <td>@item.BattleDate</td>
+                    <td>@item.Tank</td>
+                    <td>@item.DamageDealt</td>
+                    <td>@item.DamageReceived</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
