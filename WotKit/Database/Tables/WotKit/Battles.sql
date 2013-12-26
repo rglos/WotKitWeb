@@ -11,7 +11,7 @@
     [BonusTypeName] NVARCHAR(20) NOT NULL, 
     [Duration] FLOAT NOT NULL, 
     [FinishReason] INT NOT NULL, 
-    [FinishReasonName] NVARCHAR(10) NOT NULL, 
+    [FinishReasonName] NVARCHAR(15) NOT NULL, 
     [GameplayId] INT NOT NULL, 
     [GameplayName] NVARCHAR(10) NOT NULL, 
     [Result] NVARCHAR(10) NOT NULL, 

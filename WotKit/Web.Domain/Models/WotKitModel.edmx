@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WotKitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Battles">
+          <Key>
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="BattleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArenaUniqueId" Type="bigint" Nullable="false" />
+          <Property Name="ParserVersion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ArenaCreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ArenaTypeId" Type="int" Nullable="false" />
+          <Property Name="ArenaTypeIcon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ArenaTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BonusType" Type="int" Nullable="false" />
+          <Property Name="BonusTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Duration" Type="float" Nullable="false" />
+          <Property Name="FinishReason" Type="int" Nullable="false" />
+          <Property Name="FinishReasonName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="GameplayId" Type="int" Nullable="false" />
+          <Property Name="GameplayName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WinnerTeam" Type="int" Nullable="false" />
+          <Property Name="VehLockMode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerBattles">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="BattleId" Type="int" Nullable="false" />
+          <Property Name="DamageDealt" Type="int" Nullable="false" />
+          <Property Name="DamageReceived" Type="int" Nullable="false" />
+          <Property Name="TankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="XP" Type="int" Nullable="false" />
+          <Property Name="XPPenalty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountDBID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PlayerBattles_Battles">
+          <End Role="Battles" Type="Self.Battles" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Battles">
+              <PropertyRef Name="BattleId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="BattleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerBattles_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WotKitModelStoreContainer">
+          <EntitySet Name="Battles" EntityType="Self.Battles" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattles" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="WotKit" store:Type="Tables" />
+          <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
+            <End Role="Battles" EntitySet="Battles" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerBattles_Players" Association="Self.FK_PlayerBattles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WotKitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Battle">
+          <Key>
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="BattleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArenaUniqueId" Type="Int64" Nullable="false" />
+          <Property Name="ParserVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArenaCreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArenaTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ArenaTypeIcon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArenaTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BonusType" Type="Int32" Nullable="false" />
+          <Property Name="BonusTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Duration" Type="Double" Nullable="false" />
+          <Property Name="FinishReason" Type="Int32" Nullable="false" />
+          <Property Name="FinishReasonName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GameplayId" Type="Int32" Nullable="false" />
+          <Property Name="GameplayName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WinnerTeam" Type="Int32" Nullable="false" />
+          <Property Name="VehLockMode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Battles" FromRole="Battles" ToRole="PlayerBattles" />
+        </EntityType>
+        <EntityType Name="PlayerBattle">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="BattleId" Type="Int32" Nullable="false" />
+          <Property Name="DamageDealt" Type="Int32" Nullable="false" />
+          <Property Name="DamageReceived" Type="Int32" Nullable="false" />
+          <Property Name="TankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XP" Type="Int32" Nullable="false" />
+          <Property Name="XPPenalty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Battle" Relationship="Self.FK_PlayerBattles_Battles" FromRole="PlayerBattles" ToRole="Battles" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerBattles_Players" FromRole="PlayerBattles" ToRole="Players" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountDBID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Players" FromRole="Players" ToRole="PlayerBattles" />
+        </EntityType>
+        <Association Name="FK_PlayerBattles_Battles">
+          <End Role="Battles" Type="Self.Battle" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Battles">
+              <PropertyRef Name="BattleId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="BattleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerBattles_Players">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WotKitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Battles" EntityType="Self.Battle" />
+          <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattle" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
+            <End Role="Battles" EntitySet="Battles" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerBattles_Players" Association="Self.FK_PlayerBattles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WotKitModelStoreContainer" CdmEntityContainer="WotKitEntities">
+          <EntitySetMapping Name="Battles">
+            <EntityTypeMapping TypeName="WotKitModel.Battle">
+              <MappingFragment StoreEntitySet="Battles">
+                <ScalarProperty Name="BattleId" ColumnName="BattleId" />
+                <ScalarProperty Name="ArenaUniqueId" ColumnName="ArenaUniqueId" />
+                <ScalarProperty Name="ParserVersion" ColumnName="ParserVersion" />
+                <ScalarProperty Name="ArenaCreateTime" ColumnName="ArenaCreateTime" />
+                <ScalarProperty Name="ArenaTypeId" ColumnName="ArenaTypeId" />
+                <ScalarProperty Name="ArenaTypeIcon" ColumnName="ArenaTypeIcon" />
+                <ScalarProperty Name="ArenaTypeName" ColumnName="ArenaTypeName" />
+                <ScalarProperty Name="BonusType" ColumnName="BonusType" />
+                <ScalarProperty Name="BonusTypeName" ColumnName="BonusTypeName" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="FinishReason" ColumnName="FinishReason" />
+                <ScalarProperty Name="FinishReasonName" ColumnName="FinishReasonName" />
+                <ScalarProperty Name="GameplayId" ColumnName="GameplayId" />
+                <ScalarProperty Name="GameplayName" ColumnName="GameplayName" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="WinnerTeam" ColumnName="WinnerTeam" />
+                <ScalarProperty Name="VehLockMode" ColumnName="VehLockMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerBattles">
+            <EntityTypeMapping TypeName="WotKitModel.PlayerBattle">
+              <MappingFragment StoreEntitySet="PlayerBattles">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="BattleId" ColumnName="BattleId" />
+                <ScalarProperty Name="DamageDealt" ColumnName="DamageDealt" />
+                <ScalarProperty Name="DamageReceived" ColumnName="DamageReceived" />
+                <ScalarProperty Name="TankName" ColumnName="TankName" />
+                <ScalarProperty Name="XP" ColumnName="XP" />
+                <ScalarProperty Name="XPPenalty" ColumnName="XPPenalty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="WotKitModel.Player">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="AccountDBID" ColumnName="AccountDBID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
