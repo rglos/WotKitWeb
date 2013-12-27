@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="WotKitModel.Player" Width="1.5" PointX="6.125" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="WotKitModel.FK_PlayerBattles_Battles" ManuallyRouted="false" />
         <AssociationConnector Association="WotKitModel.FK_PlayerBattles_Players" ManuallyRouted="false" />
+        <AssociationConnector Association="WotKitModel.FK_Battles_Players" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

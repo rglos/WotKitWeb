@@ -36,7 +36,9 @@ namespace Web.Domain.Models
         public string Result { get; set; }
         public int WinnerTeam { get; set; }
         public int VehLockMode { get; set; }
+        public Nullable<int> SubmittedBy { get; set; }
     
         public virtual ICollection<PlayerBattle> PlayerBattles { get; set; }
+        public virtual Player Player { get; set; }
     }
 }

@@ -26,6 +26,7 @@
           <Property Name="Result" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="WinnerTeam" Type="int" Nullable="false" />
           <Property Name="VehLockMode" Type="int" Nullable="false" />
+          <Property Name="SubmittedBy" Type="int" />
         </EntityType>
         <EntityType Name="PlayerBattles">
           <Key>
@@ -39,6 +40,16 @@
           <Property Name="TankName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="XP" Type="int" Nullable="false" />
           <Property Name="XPPenalty" Type="int" Nullable="false" />
+          <Property Name="tmenXP" Type="int" Nullable="false" />
+          <Property Name="freeXP" Type="int" Nullable="false" />
+          <Property Name="eventXP" Type="int" Nullable="false" />
+          <Property Name="eventTMenXP" Type="int" Nullable="false" />
+          <Property Name="eventFreeXP" Type="int" Nullable="false" />
+          <Property Name="credits" Type="int" Nullable="false" />
+          <Property Name="autoRepairCost" Type="int" Nullable="false" />
+          <Property Name="autoEquipCost" Type="int" Nullable="false" />
+          <Property Name="autoLoadCost" Type="int" Nullable="false" />
+          <Property Name="won" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Players">
           <Key>
@@ -48,6 +59,18 @@
           <Property Name="AccountDBID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Battles_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+          <End Role="Battles" Type="Self.Battles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Battles">
+              <PropertyRef Name="SubmittedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PlayerBattles_Battles">
           <End Role="Battles" Type="Self.Battles" Multiplicity="1" />
           <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
@@ -76,6 +99,10 @@
           <EntitySet Name="Battles" EntityType="Self.Battles" Schema="WotKit" store:Type="Tables" />
           <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattles" Schema="WotKit" store:Type="Tables" />
           <EntitySet Name="Players" EntityType="Self.Players" Schema="WotKit" store:Type="Tables" />
+          <AssociationSet Name="FK_Battles_Players" Association="Self.FK_Battles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="Battles" EntitySet="Battles" />
+          </AssociationSet>
           <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
             <End Role="Battles" EntitySet="Battles" />
             <End Role="PlayerBattles" EntitySet="PlayerBattles" />
@@ -111,6 +138,8 @@
           <Property Name="WinnerTeam" Type="Int32" Nullable="false" />
           <Property Name="VehLockMode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Battles" FromRole="Battles" ToRole="PlayerBattles" />
+          <Property Name="SubmittedBy" Type="Int32" />
+          <NavigationProperty Name="Player" Relationship="WotKitModel.FK_Battles_Players" FromRole="Battle" ToRole="Player" />
         </EntityType>
         <EntityType Name="PlayerBattle">
           <Key>
@@ -126,6 +155,16 @@
           <Property Name="XPPenalty" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Battle" Relationship="Self.FK_PlayerBattles_Battles" FromRole="PlayerBattles" ToRole="Battles" />
           <NavigationProperty Name="Player" Relationship="Self.FK_PlayerBattles_Players" FromRole="PlayerBattles" ToRole="Players" />
+          <Property Name="tmenXP" Type="Int32" Nullable="false" />
+          <Property Name="freeXP" Type="Int32" Nullable="false" />
+          <Property Name="eventXP" Type="Int32" Nullable="false" />
+          <Property Name="eventTMenXP" Type="Int32" Nullable="false" />
+          <Property Name="eventFreeXP" Type="Int32" Nullable="false" />
+          <Property Name="credits" Type="Int32" Nullable="false" />
+          <Property Name="autoRepairCost" Type="Int32" Nullable="false" />
+          <Property Name="autoEquipCost" Type="Int32" Nullable="false" />
+          <Property Name="autoLoadCost" Type="Int32" Nullable="false" />
+          <Property Name="won" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -135,6 +174,7 @@
           <Property Name="AccountDBID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Players" FromRole="Players" ToRole="PlayerBattles" />
+          <NavigationProperty Name="Battles" Relationship="WotKitModel.FK_Battles_Players" FromRole="Player" ToRole="Battle" />
         </EntityType>
         <Association Name="FK_PlayerBattles_Battles">
           <End Role="Battles" Type="Self.Battle" Multiplicity="1" />
@@ -172,7 +212,23 @@
             <End Role="Players" EntitySet="Players" />
             <End Role="PlayerBattles" EntitySet="PlayerBattles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Battles_Players" Association="WotKitModel.FK_Battles_Players">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Battle" EntitySet="Battles" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Battles_Players">
+          <End Type="WotKitModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="WotKitModel.Battle" Role="Battle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Battle">
+              <PropertyRef Name="SubmittedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -182,6 +238,7 @@
           <EntitySetMapping Name="Battles">
             <EntityTypeMapping TypeName="WotKitModel.Battle">
               <MappingFragment StoreEntitySet="Battles">
+                <ScalarProperty Name="SubmittedBy" ColumnName="SubmittedBy" />
                 <ScalarProperty Name="BattleId" ColumnName="BattleId" />
                 <ScalarProperty Name="ArenaUniqueId" ColumnName="ArenaUniqueId" />
                 <ScalarProperty Name="ParserVersion" ColumnName="ParserVersion" />
@@ -205,6 +262,16 @@
           <EntitySetMapping Name="PlayerBattles">
             <EntityTypeMapping TypeName="WotKitModel.PlayerBattle">
               <MappingFragment StoreEntitySet="PlayerBattles">
+                <ScalarProperty Name="won" ColumnName="won" />
+                <ScalarProperty Name="autoLoadCost" ColumnName="autoLoadCost" />
+                <ScalarProperty Name="autoEquipCost" ColumnName="autoEquipCost" />
+                <ScalarProperty Name="autoRepairCost" ColumnName="autoRepairCost" />
+                <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="eventFreeXP" ColumnName="eventFreeXP" />
+                <ScalarProperty Name="eventTMenXP" ColumnName="eventTMenXP" />
+                <ScalarProperty Name="eventXP" ColumnName="eventXP" />
+                <ScalarProperty Name="freeXP" ColumnName="freeXP" />
+                <ScalarProperty Name="tmenXP" ColumnName="tmenXP" />
                 <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
                 <ScalarProperty Name="BattleId" ColumnName="BattleId" />
                 <ScalarProperty Name="DamageDealt" ColumnName="DamageDealt" />

@@ -17,6 +17,7 @@ namespace Web.Domain.Models
         public Player()
         {
             this.PlayerBattles = new HashSet<PlayerBattle>();
+            this.Battles = new HashSet<Battle>();
         }
     
         public int PlayerId { get; set; }
@@ -24,5 +25,6 @@ namespace Web.Domain.Models
         public string Name { get; set; }
     
         public virtual ICollection<PlayerBattle> PlayerBattles { get; set; }
+        public virtual ICollection<Battle> Battles { get; set; }
     }
 }

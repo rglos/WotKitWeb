@@ -9,10 +9,12 @@ namespace LocalClientLibrary
 {
     public class BattleResultsParser
     {
+        private const string Personal = "personal";
+
         public static Web.Domain.Models.Player ParsePlayer(string json)
         {
             JObject jobject = JObject.Parse(json);
-            var personal = (JObject)jobject["personal"];
+            var personal = (JObject)jobject[Personal];
             var accountDBID = (int)personal["accountDBID"];
             var name = (string)jobject["players"][accountDBID.ToString()]["name"];
 
@@ -72,11 +74,21 @@ namespace LocalClientLibrary
         {
             JObject jobject = JObject.Parse(json);
 
-            var damageDealt = (int)jobject["personal"]["damageDealt"];
-            var damageReceived = (int)jobject["personal"]["damageReceived"];
-            var tankName = (string)jobject["personal"]["tankName"];
-            var xp = (int)jobject["personal"]["xp"];
-            var xpPenalty = (int)jobject["personal"]["xpPenalty"];
+            var damageDealt = (int)jobject[Personal]["damageDealt"];
+            var damageReceived = (int)jobject[Personal]["damageReceived"];
+            var tankName = (string)jobject[Personal]["tankName"];
+            var xp = (int)jobject[Personal]["xp"];
+            var xpPenalty = (int)jobject[Personal]["xpPenalty"];
+            var tmenXP = (int)jobject[Personal]["tmenXP"];
+            var freeXP = (int)jobject[Personal]["freeXP"];
+            var eventXP = (int)jobject[Personal]["eventXP"];
+            var eventTMenXP = (int)jobject[Personal]["eventTMenXP"];
+            var eventFreeXP = (int)jobject[Personal]["eventFreeXP"];
+            var credits = (int)jobject[Personal]["credits"];
+            var autoRepairCost = (int)jobject[Personal]["autoRepairCost"];
+            var autoLoadCost = (int)jobject[Personal]["autoLoadCost"][0];
+            var autoEquipCost = (int)jobject[Personal]["autoEquipCost"][0];
+            var won = (bool)jobject[Personal]["won"];
 
             return new Web.Domain.Models.PlayerBattle() { 
                 BattleId = battle.BattleId,
@@ -85,7 +97,17 @@ namespace LocalClientLibrary
                 DamageReceived = damageReceived,
                 TankName = tankName,
                 XP = xp,
-                XPPenalty = xpPenalty
+                XPPenalty = xpPenalty,
+                tmenXP = tmenXP,
+                freeXP = freeXP,
+                eventXP = eventXP,
+                eventTMenXP = eventTMenXP,
+                eventFreeXP = eventFreeXP,
+                credits = credits,
+                autoEquipCost = autoEquipCost,
+                autoLoadCost = autoLoadCost,
+                autoRepairCost = autoRepairCost,
+                won = won
             };
         }
 

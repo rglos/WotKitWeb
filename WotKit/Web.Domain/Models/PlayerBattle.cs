@@ -21,6 +21,16 @@ namespace Web.Domain.Models
         public string TankName { get; set; }
         public int XP { get; set; }
         public int XPPenalty { get; set; }
+        public int tmenXP { get; set; }
+        public int freeXP { get; set; }
+        public int eventXP { get; set; }
+        public int eventTMenXP { get; set; }
+        public int eventFreeXP { get; set; }
+        public int credits { get; set; }
+        public int autoRepairCost { get; set; }
+        public int autoEquipCost { get; set; }
+        public int autoLoadCost { get; set; }
+        public bool won { get; set; }
     
         public virtual Battle Battle { get; set; }
         public virtual Player Player { get; set; }

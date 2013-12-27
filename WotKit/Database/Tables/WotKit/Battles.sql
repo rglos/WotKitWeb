@@ -17,9 +17,11 @@
     [Result] NVARCHAR(10) NOT NULL, 
     [WinnerTeam] INT NOT NULL, 
     [VehLockMode] INT NOT NULL,
-	CONSTRAINT [PK_Battles] PRIMARY KEY NONCLUSTERED ([BattleId])
+	[SubmittedBy] INT NULL, 
+    CONSTRAINT [PK_Battles] PRIMARY KEY NONCLUSTERED ([BattleId]), 
+    CONSTRAINT [FK_Battles_Players] FOREIGN KEY ([SubmittedBy]) REFERENCES [WotKit].[Players]([PlayerId])
 )
 
 GO
 
-CREATE UNIQUE CLUSTERED INDEX [IX_Battles_ArenaUniqueId] ON [WotKit].[Battles] ([ArenaTypeId])
+CREATE UNIQUE CLUSTERED INDEX [IX_Battles_ArenaUniqueId] ON [WotKit].[Battles] ([ArenaUniqueId])

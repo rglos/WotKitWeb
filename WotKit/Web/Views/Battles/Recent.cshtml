@@ -6,40 +6,136 @@
 
 <h2>Recent Battles</h2>
 
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (!Model.DisplayBattles)
 {
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        @ViewBag.Message
+        @Model.Message
     </div>
 }
 else
 {
-    <h3>@Html.DisplayFor(m => m.Name) - @Html.DisplayFor(m => m.AccountDBID)</h3>
+    if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    @Model.Message
+                </div>
+            </div>
+        </div>
+    }
 
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Tank</th>
-                <th>Damage Dealt</th>
-                <th>Damage Received</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Battles)
+    @* // TODO: Wrap this in a check for authentication and that the current user is the same as the user being viewed - other users shouldn't be able to start someone elses session *@
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("StartNewSession", "Battles", FormMethod.Post, new { @class = "form-inline", role = "form" }))
             {
-                <tr>
-                    <td>@item.BattleDate</td>
-                    <td>@item.Tank</td>
-                    <td>@item.DamageDealt</td>
-                    <td>@item.DamageReceived</td>
-                </tr>
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Name)
+                <button type="submit" class="btn btn-default">Start New Session</button>
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h3>@Html.DisplayFor(m => m.Name) - @Html.DisplayFor(m => m.AccountDBID)</h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Tank</th>
+                        <th>Map</th>
+                        <th>Status</th>
+                        @*<th>Damage Dealt</th>
+                            <th>Damage Received</th>*@
+                        <th>Net Credits</th>
+                        @*<th>eventFreeXP</th>
+                            <th>eventTMenXP</th>
+                            <th>eventXP</th>*@
+
+                        <th>XP</th>
+                        <th>Crew XP</th>
+                        <th>Free XP</th>
+                        @*<th>XPPenalty</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Battles)
+                    {
+                        <tr>
+                            <td>@item.BattleDate</td>
+                            <td>@item.Tank</td>
+                            <td>@Html.DisplayFor(x => item.Map)</td>
+                            <td class="@item.StatusClass"><span class="@item.StatusTextClass">@item.Status</span></td>
+                            @*<td>@item.DamageDealt</td>
+                                <td>@item.DamageReceived</td>*@
+                            <td class="text-right">
+                                <span class="@item.NetCreditsClass" data-toggle="popover" data-equip="@Html.DisplayFor(x => item.autoEquipCost)" data-repair="@Html.DisplayFor(x => item.autoRepairCost)" data-ammo="@Html.DisplayFor(x => item.autoLoadCost)" data-credits="@Html.DisplayFor(x => item.credits)">
+                                    @Html.DisplayFor(x => item.NetCredits)
+                                </span>
+                            </td>
+                            @*<td>@item.eventFreeXP</td>
+                                <td>@item.eventTMenXP</td>
+                                <td>@item.eventXP</td>*@
+
+                            <td class="text-right">@Html.DisplayFor(x => item.XP)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.tmenXP)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.freeXP)</td>
+                            @*<td>@item.XPPenalty</td>*@
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">@Html.DisplayFor(m => Model.Summary.NetCredits)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+
 }
 
+@section scripts
+{
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
 
+            $("[data-toggle=popover]").each(function () {
+                var table = "<table>" +
+                            "<tr><td>Received</td><td class='text-right'>" + $(this).attr('data-credits') + "</td></tr>" +
+                            "<tr><td>Auto-repair vehicle</td><td class='text-right text-danger'>" + $(this).attr('data-repair') + "</td></tr>" +
+                            "<tr><td>Auto-resupply ammunition</td><td class='text-right text-danger'>" + $(this).attr('data-ammo') + "</td></tr>" +
+                            "<tr><td>Auto-resupply consumables</td><td class='text-right text-danger'>" + $(this).attr('data-equip') + "</td></tr>" +
+                            "</table>";
+                //console.log($(this).attr('data-credits'));
+                $(this).attr("title", table);
+            });
+
+            $("[data-toggle=popover]").popover({ 'placement': 'left', 'html': true, 'trigger': 'hover' });
+
+
+        });
+    </script>
+}
 
 
