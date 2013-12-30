@@ -54,6 +54,7 @@ namespace Web.Models
         public string StatusClass { get; set; }
         public string StatusTextClass { get; set; }
         public string NetCreditsClass { get; set; }
+        public int WinnerTeam { get; set; }
     }
 
     public class RecentBattleSummary

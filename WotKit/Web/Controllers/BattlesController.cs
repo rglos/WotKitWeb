@@ -59,7 +59,8 @@ namespace Web.Controllers
                                     XP = x.XP,
                                     XPPenalty = x.XPPenalty,
                                     NetCredits = (x.credits - x.autoRepairCost - x.autoLoadCost - x.autoEquipCost),
-                                    Won = x.won
+                                    Won = x.won,
+                                    WinnerTeam = x.Battle.WinnerTeam
                                 };
 
             model.Battles = playerBattles.ToList();
@@ -72,6 +73,12 @@ namespace Web.Controllers
                     battle.Status = "Victory";
                     battle.StatusClass = "success";
                     battle.StatusTextClass = "text-success";
+                }
+                else if (battle.WinnerTeam == 0)
+                {
+                    battle.Status = "Draw";
+                    battle.StatusClass = "warning";
+                    battle.StatusTextClass = "text-warning";
                 }
                 else
                 {

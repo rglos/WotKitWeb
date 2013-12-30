@@ -20,7 +20,8 @@ namespace LocalClientLibrary
 
         void Changed(object sender, FileSystemEventArgs e)
         {
-            var message = string.Format("DossierWatcher: Changed; e.Name: {0}; e.ChangeType: {1}; e.Fullpath: {2}", e.Name, e.ChangeType, e.FullPath);
+            var message = string.Format("DossierWatcher: Changed; e.Name: {0}", e.Name);
+            //var message = string.Format("DossierWatcher: Changed; e.Name: {0}; e.ChangeType: {1}; e.Fullpath: {2}", e.Name, e.ChangeType, e.FullPath);
             LocalClientLibrary.MyEventSource.Log.Message(message);
         }
     }

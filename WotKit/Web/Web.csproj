@@ -177,6 +177,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BattleController.cs" />
+    <Compile Include="Controllers\BattleResultFileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerBattleController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -188,6 +189,8 @@
     <Compile Include="Models\BattlesModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BattleResultsParser.cs" />
+    <Compile Include="Services\ConvertBattleResultToJSONService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

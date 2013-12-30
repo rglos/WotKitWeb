@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -50,6 +51,17 @@ namespace LocalClientLibrary
             var domainObject = await response.Content.ReadAsAsync<Web.Domain.Models.PlayerBattle>();
 
             return domainObject;
+        }
+
+        public static async Task<HttpResponseMessage> PostBattleResult(string filepath)
+        {
+            var name = Path.GetFileNameWithoutExtension(filepath);
+            var fileName = Path.GetFileName(filepath);
+
+            var requestContent = new MultipartFormDataContent();
+            requestContent.Add(new StreamContent(new FileStream(filepath, FileMode.Open)), name, fileName);
+            var result = await _client.PostAsync("api/battleresultfile", requestContent);
+            return result;
         }
     }
 }

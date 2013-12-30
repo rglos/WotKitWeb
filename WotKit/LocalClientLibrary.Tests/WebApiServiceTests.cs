@@ -35,5 +35,18 @@ namespace LocalClientLibrary.Tests
             // Assert
             Assert.Inconclusive();
         }
+
+        [TestMethod]
+        public void Exercise_PostBattleResult()
+        {
+            // Arrange
+            var filePath = @"C:\Users\rglos\AppData\Roaming\Wargaming.net\WorldOfTanks\battle_results\KJFF6OZRGYYDMOA=\24128337383252994.dat";
+
+            // Act
+            var actual = WebApiService.PostBattleResult(filePath).Result;
+
+            // Assert
+            Assert.Inconclusive();
+        }
     }
 }
