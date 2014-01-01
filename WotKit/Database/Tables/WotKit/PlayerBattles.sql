@@ -17,7 +17,11 @@
     [autoEquipCost] INT NOT NULL, 
     [autoLoadCost] INT NOT NULL, 
     [won] BIT NOT NULL, 
+	[kills] INT NOT NULL
     CONSTRAINT [PK_PlayerBattles] PRIMARY KEY ([PlayerId], [BattleId]), 
+    [spotted] INT NOT NULL, 
+    [capturePoints] INT NOT NULL, 
+    [droppedCapturePoints] INT NOT NULL, 
     CONSTRAINT [FK_PlayerBattles_Players] FOREIGN KEY ([PlayerId]) REFERENCES [WotKit].[Players]([PlayerId]),
     CONSTRAINT [FK_PlayerBattles_Battles] FOREIGN KEY ([BattleId]) REFERENCES [WotKit].[Battles]([BattleId])
 )

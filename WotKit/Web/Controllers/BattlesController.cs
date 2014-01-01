@@ -60,7 +60,11 @@ namespace Web.Controllers
                                     XPPenalty = x.XPPenalty,
                                     NetCredits = (x.credits - x.autoRepairCost - x.autoLoadCost - x.autoEquipCost),
                                     Won = x.won,
-                                    WinnerTeam = x.Battle.WinnerTeam
+                                    WinnerTeam = x.Battle.WinnerTeam,
+                                    Kills = x.kills,
+                                    Spotted = x.spotted,
+                                    CapturePoints = x.capturePoints,
+                                    DroppedCapturePoints = x.droppedCapturePoints
                                 };
 
             model.Battles = playerBattles.ToList();

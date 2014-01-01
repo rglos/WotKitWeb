@@ -50,6 +50,10 @@
           <Property Name="autoEquipCost" Type="int" Nullable="false" />
           <Property Name="autoLoadCost" Type="int" Nullable="false" />
           <Property Name="won" Type="bit" Nullable="false" />
+          <Property Name="kills" Type="int" Nullable="false" />
+          <Property Name="spotted" Type="int" Nullable="false" />
+          <Property Name="capturePoints" Type="int" Nullable="false" />
+          <Property Name="droppedCapturePoints" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Players">
           <Key>
@@ -165,6 +169,10 @@
           <Property Name="autoEquipCost" Type="Int32" Nullable="false" />
           <Property Name="autoLoadCost" Type="Int32" Nullable="false" />
           <Property Name="won" Type="Boolean" Nullable="false" />
+          <Property Name="kills" Type="Int32" Nullable="false" />
+          <Property Name="spotted" Type="Int32" Nullable="false" />
+          <Property Name="capturePoints" Type="Int32" Nullable="false" />
+          <Property Name="droppedCapturePoints" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -262,6 +270,10 @@
           <EntitySetMapping Name="PlayerBattles">
             <EntityTypeMapping TypeName="WotKitModel.PlayerBattle">
               <MappingFragment StoreEntitySet="PlayerBattles">
+                <ScalarProperty Name="droppedCapturePoints" ColumnName="droppedCapturePoints" />
+                <ScalarProperty Name="capturePoints" ColumnName="capturePoints" />
+                <ScalarProperty Name="spotted" ColumnName="spotted" />
+                <ScalarProperty Name="kills" ColumnName="kills" />
                 <ScalarProperty Name="won" ColumnName="won" />
                 <ScalarProperty Name="autoLoadCost" ColumnName="autoLoadCost" />
                 <ScalarProperty Name="autoEquipCost" ColumnName="autoEquipCost" />

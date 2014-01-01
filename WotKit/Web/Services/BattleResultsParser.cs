@@ -88,6 +88,10 @@ namespace Web.Services
             var autoLoadCost = (int)jobject[Personal]["autoLoadCost"][0];
             var autoEquipCost = (int)jobject[Personal]["autoEquipCost"][0];
             var won = (bool)jobject[Personal]["won"];
+            var kills = (int)jobject[Personal]["kills"];
+            var spotted = (int)jobject[Personal]["spotted"];
+            var capturePoints = (int)jobject[Personal]["capturePoints"];
+            var droppedCapturePoints = (int)jobject[Personal]["droppedCapturePoints"];
 
             return new Web.Domain.Models.PlayerBattle()
             {
@@ -107,7 +111,11 @@ namespace Web.Services
                 autoEquipCost = autoEquipCost,
                 autoLoadCost = autoLoadCost,
                 autoRepairCost = autoRepairCost,
-                won = won
+                won = won,
+                kills = kills,
+                spotted = spotted,
+                capturePoints = capturePoints,
+                droppedCapturePoints = droppedCapturePoints
             };
         }
 

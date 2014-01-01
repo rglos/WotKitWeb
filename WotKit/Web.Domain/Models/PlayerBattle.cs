@@ -31,6 +31,10 @@ namespace Web.Domain.Models
         public int autoEquipCost { get; set; }
         public int autoLoadCost { get; set; }
         public bool won { get; set; }
+        public int kills { get; set; }
+        public int spotted { get; set; }
+        public int capturePoints { get; set; }
+        public int droppedCapturePoints { get; set; }
     
         public virtual Battle Battle { get; set; }
         public virtual Player Player { get; set; }

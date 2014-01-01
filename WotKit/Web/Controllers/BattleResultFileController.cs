@@ -41,6 +41,10 @@ namespace Web.Controllers
                     System.Diagnostics.Trace.WriteLine("Server file path: " + file.LocalFileName);
 
                     var newFilePath = Path.Combine(Path.GetDirectoryName(file.LocalFileName), file.Headers.ContentDisposition.FileName);
+                    if (File.Exists(newFilePath))
+                    {
+                        File.Delete(newFilePath);
+                    }
                     File.Move(file.LocalFileName, newFilePath);
 
                     var json = ConvertBattleResultToJSONService.Convert(newFilePath);

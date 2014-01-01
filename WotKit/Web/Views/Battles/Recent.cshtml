@@ -53,7 +53,7 @@ else
             <table class="table table-condensed table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <th>UTC Date</th>
                         <th>Tank</th>
                         <th>Map</th>
                         <th>Status</th>
@@ -68,6 +68,10 @@ else
                         <th>Crew XP</th>
                         <th>Free XP</th>
                         @*<th>XPPenalty</th>*@
+                        <th>Kills</th>
+                        <th>Spotted</th>
+                        <th>Capture Points</th>
+                        <th>Defense Points</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,6 +97,10 @@ else
                             <td class="text-right">@Html.DisplayFor(x => item.tmenXP)</td>
                             <td class="text-right">@Html.DisplayFor(x => item.freeXP)</td>
                             @*<td>@item.XPPenalty</td>*@
+                            <td class="text-right">@Html.DisplayFor(x => item.Kills)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.Spotted)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.CapturePoints)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.DroppedCapturePoints)</td>
                         </tr>
                     }
                 </tbody>
