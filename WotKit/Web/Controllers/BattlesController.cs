@@ -14,7 +14,19 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var model = new BattlesIndexModel();
+
+            var query = from x in db.PlayerBattles
+                        group x.Player by x.Player.Name into g
+                        select new { Name = g.Key, Count = g.Count() };
+
+            foreach (var item in query)
+            {
+                var battlesIndexRowModel = new BattlesIndexRowModel() { Player = item.Name, RecentBattlesCount = item.Count };
+                model.Rows.Add(battlesIndexRowModel);
+            }
+
+            return View(model);
         }
         
         public ActionResult Recent(string id)

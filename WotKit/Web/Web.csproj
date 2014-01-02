@@ -189,8 +189,10 @@
     <Compile Include="Models\BattlesModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\BattleResultsParser.cs" />
     <Compile Include="Services\ConvertBattleResultToJSONService.cs" />
+    <Compile Include="Services\WargamingApiService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,21 @@ using System.Web;
 
 namespace Web.Models
 {
+    public class BattlesIndexModel
+    {
+        public BattlesIndexModel()
+        {
+            Rows = new List<BattlesIndexRowModel>();
+        }
+        public List<BattlesIndexRowModel> Rows { get; set; }
+    }
+
+    public class BattlesIndexRowModel
+    {
+        public string Player { get; set; }
+        public int RecentBattlesCount { get; set; }
+    }
+
     public class RecentBattlesModel
     {
         public RecentBattlesModel()
