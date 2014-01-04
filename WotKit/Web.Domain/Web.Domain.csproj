@@ -59,7 +59,7 @@
     <Compile Include="Models\PlayerBattle.cs">
       <DependentUpon>WotKitModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WN8ExpectedTankValues.cs">
+    <Compile Include="Models\Tank.cs">
       <DependentUpon>WotKitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WotKitModel.Context.cs">

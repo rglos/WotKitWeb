@@ -17,26 +17,20 @@ namespace Web.Controllers
             return View();
         }
 
-        public ActionResult WN8ExpectedTankValues()
+        public ActionResult Tanks()
         {
-            var model = new WN8ExpectedTankValuesModel();
+            var model = new TanksIndexModel();
 
-            var query = from x in db.WN8ExpectedTankValues
-                        select new WN8ExpectedTankValuesRowModel
+            var query = from x in db.Tanks
+                        select new TanksIndexRowModel
                         {
-                            Class = x.Class,
-                            Damage = x.Damage,
-                            Defense = x.Defense,
-                            Frag = x.Frag,
-                            IDNum = x.IDNum,
-                            Name = x.Name,
-                            Nation = x.Nation,
-                            Spot = x.Spot,
-                            Tier = x.Tier,
-                            Win = x.Win
+                            Level = x.Level,
+                            Name = x.Namei18n,
+                            Nation = x.Nationi18n,
+                            TankId = x.TankId,
+                            TankType = x.TankType
                         };
-
-            model.Rows.AddRange(query.ToList());
+            model.Tanks.AddRange(query.ToList());
 
             return View(model);
         }

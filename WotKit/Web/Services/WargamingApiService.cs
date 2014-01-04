@@ -41,10 +41,15 @@ namespace Web.Services
                     var tankType = (string)tankdata["type"];
                     var tankDataId = (int)tankdata["tank_id"];
 
+                    // name is a concantination of nation and tank ala: "#ussr_vehicles:T-34"
+                    // so we want just the stuff on the right of the colon
+
+                    var tankNameOnly = name.Split(':')[1];
+
                     listOfVehicles.Tanks.Add(new Tank() { 
                         IsPremium = isPremium,
                         Level = level,
-                        Name = name,
+                        Name = tankNameOnly,
                         Namei18n = namei18n,
                         Nation = nation,
                         Nationi18n = nationi18n,

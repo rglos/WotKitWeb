@@ -195,6 +195,7 @@
     <Compile Include="Services\BattleResultsParser.cs" />
     <Compile Include="Services\ConvertBattleResultToJSONService.cs" />
     <Compile Include="Services\WargamingApiService.cs" />
+    <Compile Include="Services\WNEfficiencyService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,7 +246,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Battles\Index.cshtml" />
     <Content Include="Views\Battles\Recent.cshtml" />
-    <Content Include="Views\Admin\WN8ExpectedTankValues.cshtml" />
+    <Content Include="Views\Admin\Tanks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

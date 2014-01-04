@@ -32,5 +32,30 @@ namespace Web.Tests.Controllers
             Assert.AreEqual(true, actual.IsSuccessStatusCode);
             //System.Diagnostics.Trace.WriteLine(test);
         }
+
+        [TestMethod]
+        public void Exercise_PostMultipleBattleResults()
+        {
+            // Arrange
+            var target = new BattleResultFileController();
+            var requestContent = new MultipartFormDataContent();
+            var files = Directory.GetFiles(@"D:\Data\WoT\BattleResults");
+            foreach (var file in files)
+            {
+                var filepath = file;
+                var name = Path.GetFileNameWithoutExtension(filepath);
+                var fileName = Path.GetFileName(filepath);
+                requestContent.Add(new StreamContent(new FileStream(filepath, FileMode.Open)), name, fileName);
+            }
+            target.Request = new HttpRequestMessage(HttpMethod.Post, "http://server.com/foos");
+            target.Request.Content = requestContent;
+            target.Configuration = new System.Web.Http.HttpConfiguration(new System.Web.Http.HttpRouteCollection());
+
+            // Act
+            var actual = target.PostBattleResultFileData().Result;
+
+            // Assert
+            Assert.AreEqual(true, actual.IsSuccessStatusCode);
+        }
     }
 }

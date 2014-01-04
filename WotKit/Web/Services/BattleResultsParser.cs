@@ -76,6 +76,8 @@ namespace Web.Services
             var damageDealt = (int)jobject[Personal]["damageDealt"];
             var damageReceived = (int)jobject[Personal]["damageReceived"];
             var tankName = (string)jobject[Personal]["tankName"];
+            // var tankId = (string)jobject[Personal]["tankId"]; // this tankId doesn't match the tank_id from the WoT API... because its typeCompDescr
+            var typeCompDescr = (int)jobject[Personal]["typeCompDescr"];
             var xp = (int)jobject[Personal]["xp"];
             var xpPenalty = (int)jobject[Personal]["xpPenalty"];
             var tmenXP = (int)jobject[Personal]["tmenXP"];
@@ -115,7 +117,8 @@ namespace Web.Services
                 kills = kills,
                 spotted = spotted,
                 capturePoints = capturePoints,
-                droppedCapturePoints = droppedCapturePoints
+                droppedCapturePoints = droppedCapturePoints,
+                typeCompDescr = typeCompDescr
             };
         }
 

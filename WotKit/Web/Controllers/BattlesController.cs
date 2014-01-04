@@ -51,6 +51,7 @@ namespace Web.Controllers
 
             var playerBattles = from x in db.PlayerBattles
                                 where x.PlayerId == player.PlayerId
+                                //join y in db.WN8ExpectedTankValues on x.TankName equals y.
                                 orderby x.Battle.ArenaCreateTime descending
                                 select new RecentBattleModel()
                                 {

@@ -22,6 +22,7 @@
     [spotted] INT NOT NULL, 
     [capturePoints] INT NOT NULL, 
     [droppedCapturePoints] INT NOT NULL, 
+    [typeCompDescr] INT NULL, 
     CONSTRAINT [FK_PlayerBattles_Players] FOREIGN KEY ([PlayerId]) REFERENCES [WotKit].[Players]([PlayerId]),
     CONSTRAINT [FK_PlayerBattles_Battles] FOREIGN KEY ([BattleId]) REFERENCES [WotKit].[Battles]([BattleId])
 )

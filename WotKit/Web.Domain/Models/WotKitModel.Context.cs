@@ -28,6 +28,6 @@ namespace Web.Domain.Models
         public virtual DbSet<Battle> Battles { get; set; }
         public virtual DbSet<PlayerBattle> PlayerBattles { get; set; }
         public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<WN8ExpectedTankValues> WN8ExpectedTankValues { get; set; }
+        public virtual DbSet<Tank> Tanks { get; set; }
     }
 }

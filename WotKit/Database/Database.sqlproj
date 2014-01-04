@@ -68,13 +68,10 @@
     <Build Include="Tables\WotKit\Players.sql" />
     <Build Include="Tables\WotKit\Battles.sql" />
     <Build Include="Tables\WotKit\PlayerBattles.sql" />
-    <Build Include="Tables\WotKit\WN8ExpectedTankValues.sql" />
     <Build Include="Tables\WotKit\Tanks.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\Local.publish.xml" />
-    <None Include="Data\expected_tank_values_v13.csv" />
-    <None Include="Data\readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />
