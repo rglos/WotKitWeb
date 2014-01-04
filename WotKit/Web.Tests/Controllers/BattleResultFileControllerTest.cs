@@ -15,7 +15,7 @@ namespace Web.Tests.Controllers
             // Arrange
             var target = new BattleResultFileController();
             var requestContent = new MultipartFormDataContent();
-            var filepath = @"C:\Users\rglos\AppData\Roaming\Wargaming.net\WorldOfTanks\battle_results\KJFF6OZRGYYDOMI=\66290613989180725.dat";
+            var filepath = @"C:\Users\rglos\AppData\Roaming\Wargaming.net\WorldOfTanks\battle_results\KJFF6OZRGYYDOMQ=\4821677704077969.dat";
             var name = Path.GetFileNameWithoutExtension(filepath);
             var fileName = Path.GetFileName(filepath);
             requestContent.Add(new StreamContent(new FileStream(filepath, FileMode.Open)), name, fileName);

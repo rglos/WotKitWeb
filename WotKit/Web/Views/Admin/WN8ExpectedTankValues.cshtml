@@ -1,0 +1,49 @@
+﻿@model Web.Models.WN8ExpectedTankValuesModel
+
+@{
+    ViewBag.Title = "WN8 Expected Tank Values";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <p>These values come from <a href="http://wiki.wnefficiency.net/pages/WN8#Expected_Stats_Matrix" target="_blank">WN8 Expected Stats Matrix</a></p>
+
+        <table class="table table-nonfluid table-condensed table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Nation</th>
+                    <th>Class</th>
+                    <th>Tier</th>
+                    <th>Win</th>
+                    <th>Frag</th>
+                    <th>Damage</th>
+                    <th>Spot</th>
+                    <th>Defense</th>
+                    <th>IDNum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Rows)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Nation</td>
+                        <td>@item.Class</td>
+                        <td class="text-right">@item.Tier</td>
+                        <td class="text-right">@item.Win</td>
+                        <td class="text-right">@item.Frag</td>
+                        <td class="text-right">@item.Damage</td>
+                        <td class="text-right">@item.Spot</td>
+                        <td class="text-right">@item.Defense</td>
+                        <td class="text-right">@item.IDNum</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

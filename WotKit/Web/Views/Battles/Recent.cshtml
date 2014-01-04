@@ -57,8 +57,8 @@ else
                         <th>Tank</th>
                         <th>Map</th>
                         <th>Status</th>
-                        @*<th>Damage Dealt</th>
-                            <th>Damage Received</th>*@
+                        <th>Damage Dealt</th>
+                        @*<th>Damage Received</th>*@
                         <th>Net Credits</th>
                         @*<th>eventFreeXP</th>
                             <th>eventTMenXP</th>
@@ -82,8 +82,8 @@ else
                             <td>@item.Tank</td>
                             <td>@Html.DisplayFor(x => item.Map)</td>
                             <td class="@item.StatusClass"><span class="@item.StatusTextClass">@item.Status</span></td>
-                            @*<td>@item.DamageDealt</td>
-                                <td>@item.DamageReceived</td>*@
+                            <td class="text-right">@Html.DisplayFor(x => item.DamageDealt)</td>
+                            @*<td>@item.DamageReceived</td>*@
                             <td class="text-right">
                                 <span class="@item.NetCreditsClass" data-toggle="popover" data-equip="@Html.DisplayFor(x => item.autoEquipCost)" data-repair="@Html.DisplayFor(x => item.autoRepairCost)" data-ammo="@Html.DisplayFor(x => item.autoLoadCost)" data-credits="@Html.DisplayFor(x => item.credits)">
                                     @Html.DisplayFor(x => item.NetCredits)
@@ -106,6 +106,7 @@ else
                 </tbody>
                 <tfoot>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

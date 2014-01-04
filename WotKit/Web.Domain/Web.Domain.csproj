@@ -59,6 +59,9 @@
     <Compile Include="Models\PlayerBattle.cs">
       <DependentUpon>WotKitModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WN8ExpectedTankValues.cs">
+      <DependentUpon>WotKitModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WotKitModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

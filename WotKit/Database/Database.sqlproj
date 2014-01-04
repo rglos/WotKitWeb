@@ -69,6 +69,7 @@
     <Build Include="Tables\WotKit\Battles.sql" />
     <Build Include="Tables\WotKit\PlayerBattles.sql" />
     <Build Include="Tables\WotKit\WN8ExpectedTankValues.sql" />
+    <Build Include="Tables\WotKit\Tanks.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\Local.publish.xml" />

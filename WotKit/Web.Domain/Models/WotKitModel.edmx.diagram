@@ -11,6 +11,7 @@
         <AssociationConnector Association="WotKitModel.FK_PlayerBattles_Battles" ManuallyRouted="false" />
         <AssociationConnector Association="WotKitModel.FK_PlayerBattles_Players" ManuallyRouted="false" />
         <AssociationConnector Association="WotKitModel.FK_Battles_Players" />
+        <EntityTypeShape EntityType="WotKitModel.WN8ExpectedTankValues" Width="2.125" PointX="8.5" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -42,7 +42,9 @@ namespace Web.Models
         public int Tier { get; set; }
         public string Tank { get; set; }
         public string Map { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int DamageDealt { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int DamageReceived { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public int XP { get; set; }
