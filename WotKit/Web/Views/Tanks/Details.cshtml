@@ -1,0 +1,114 @@
+﻿@model Web.Domain.Models.Tank
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tank</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPremium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPremium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Namei18n)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Namei18n)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationi18n)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationi18n)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TankType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TankType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedFrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedFrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedSpot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedSpot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedDefense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedDefense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedWin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedWin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.TankId }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

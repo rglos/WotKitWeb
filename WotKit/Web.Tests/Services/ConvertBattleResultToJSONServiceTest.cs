@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Web.Services;
 
-namespace Web.Tests.Controllers
+namespace Web.Tests.Services
 {
     [TestClass]
     public class ConvertBattleResultToJSONServiceTest
@@ -12,7 +12,7 @@ namespace Web.Tests.Controllers
         {
             var target = new ConvertBattleResultToJSONService();
 
-            var actual = ConvertBattleResultToJSONService.Convert(@"D:\Data\WoT\Temp\56453343585227702.dat");
+            var actual = ConvertBattleResultToJSONService.Convert(@"D:\Data\WoT\Temp\78942037161538862.dat");
 
             Assert.IsNotNull(actual);
         }

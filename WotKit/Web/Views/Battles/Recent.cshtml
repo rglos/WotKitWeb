@@ -72,10 +72,7 @@ else
                         <th>Crew XP</th>
                         <th>Free XP</th>
                         @*<th>XPPenalty</th>*@
-                        <th>Kills</th>
-                        <th>Spotted</th>
-                        <th>Capture Points</th>
-                        <th>Defense Points</th>
+                        <th>WN8</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,7 +86,7 @@ else
                             <td class="text-right">@Html.DisplayFor(x => item.DamageDealt)</td>
                             @*<td>@item.DamageReceived</td>*@
                             <td class="text-right">
-                                <span class="@item.NetCreditsClass" data-toggle="popover" data-equip="@Html.DisplayFor(x => item.autoEquipCost)" data-repair="@Html.DisplayFor(x => item.autoRepairCost)" data-ammo="@Html.DisplayFor(x => item.autoLoadCost)" data-credits="@Html.DisplayFor(x => item.credits)">
+                                <span class="@item.NetCreditsClass netcredits" data-toggle="popover" data-equip="@Html.DisplayFor(x => item.autoEquipCost)" data-repair="@Html.DisplayFor(x => item.autoRepairCost)" data-ammo="@Html.DisplayFor(x => item.autoLoadCost)" data-credits="@Html.DisplayFor(x => item.credits)">
                                     @Html.DisplayFor(x => item.NetCredits)
                                 </span>
                             </td>
@@ -101,10 +98,9 @@ else
                             <td class="text-right">@Html.DisplayFor(x => item.tmenXP)</td>
                             <td class="text-right">@Html.DisplayFor(x => item.freeXP)</td>
                             @*<td>@item.XPPenalty</td>*@
-                            <td class="text-right">@Html.DisplayFor(x => item.Kills)</td>
-                            <td class="text-right">@Html.DisplayFor(x => item.Spotted)</td>
-                            <td class="text-right">@Html.DisplayFor(x => item.CapturePoints)</td>
-                            <td class="text-right">@Html.DisplayFor(x => item.DroppedCapturePoints)</td>
+                            <td class="text-right">
+                                <span class="wn8" data-toggle="popover" data-kills="@Html.DisplayFor(x => item.Kills)" data-spotted="@Html.DisplayFor(x => item.Spotted)" data-capturepoints="@Html.DisplayFor(x => item.CapturePoints)" data-droppedcapturepoints="@Html.DisplayFor(x => item.DroppedCapturePoints)">@Html.DisplayFor(x => item.WN8)</span>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -116,6 +112,7 @@ else
                         <td></td>
                         <td></td>
                         <td class="text-right">@Html.DisplayFor(m => Model.Summary.NetCredits)</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -133,7 +130,7 @@ else
     <script type="text/javascript">
         jQuery(document).ready(function () {
 
-            $("[data-toggle=popover]").each(function () {
+            $(".netcredits").each(function () {
                 var table = "<table>" +
                             "<tr><td>Received</td><td class='text-right'>" + $(this).attr('data-credits') + "</td></tr>" +
                             "<tr><td>Auto-repair vehicle</td><td class='text-right text-danger'>" + $(this).attr('data-repair') + "</td></tr>" +
@@ -141,6 +138,16 @@ else
                             "<tr><td>Auto-resupply consumables</td><td class='text-right text-danger'>" + $(this).attr('data-equip') + "</td></tr>" +
                             "</table>";
                 //console.log($(this).attr('data-credits'));
+                $(this).attr("title", table);
+            });
+
+            $(".wn8").each(function () {
+                var table = "<table>" +
+                            "<tr><td>Kills</td><td class='text-right'>" + $(this).attr('data-kills') + "</td></tr>" +
+                            "<tr><td>Spotted</td><td class='text-right'>" + $(this).attr('data-spotted') + "</td></tr>" +
+                            "<tr><td>Capture Points</td><td class='text-right'>" + $(this).attr('data-capturepoints') + "</td></tr>" +
+                            "<tr><td>Defense Points</td><td class='text-right'>" + $(this).attr('data-droppedcapturepoints') + "</td></tr>" +
+                            "</table>";
                 $(this).attr("title", table);
             });
 

@@ -1,0 +1,125 @@
+﻿@model Web.Domain.Models.Tank
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Tank</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.TankId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nation)
+                @Html.ValidationMessageFor(model => model.Nation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Level, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Level)
+                @Html.ValidationMessageFor(model => model.Level)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsPremium, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsPremium)
+                @Html.ValidationMessageFor(model => model.IsPremium)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Namei18n, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Namei18n)
+                @Html.ValidationMessageFor(model => model.Namei18n)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nationi18n, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nationi18n)
+                @Html.ValidationMessageFor(model => model.Nationi18n)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TankType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TankType)
+                @Html.ValidationMessageFor(model => model.TankType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectedFrag, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpectedFrag)
+                @Html.ValidationMessageFor(model => model.ExpectedFrag)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectedDamage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpectedDamage)
+                @Html.ValidationMessageFor(model => model.ExpectedDamage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectedSpot, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpectedSpot)
+                @Html.ValidationMessageFor(model => model.ExpectedSpot)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectedDefense, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpectedDefense)
+                @Html.ValidationMessageFor(model => model.ExpectedDefense)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectedWin, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpectedWin)
+                @Html.ValidationMessageFor(model => model.ExpectedWin)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

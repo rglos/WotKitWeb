@@ -41,6 +41,7 @@ namespace Web.Models
         public DateTime BattleDate { get; set; }
         public int Tier { get; set; }
         public string Tank { get; set; }
+        public int TankId { get; set; }
         public string Map { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public int DamageDealt { get; set; }
@@ -76,6 +77,8 @@ namespace Web.Models
         public int Spotted { get; set; }
         public int CapturePoints { get; set; }
         public int DroppedCapturePoints { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public double WN8 { get; set; }
     }
 
     public class RecentBattleSummary

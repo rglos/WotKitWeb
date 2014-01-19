@@ -35,7 +35,7 @@ namespace Web.Domain.Models
         public int spotted { get; set; }
         public int capturePoints { get; set; }
         public int droppedCapturePoints { get; set; }
-        public Nullable<int> typeCompDescr { get; set; }
+        public int typeCompDescr { get; set; }
     
         public virtual Battle Battle { get; set; }
         public virtual Player Player { get; set; }

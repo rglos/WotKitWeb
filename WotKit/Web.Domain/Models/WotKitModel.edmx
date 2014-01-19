@@ -54,7 +54,7 @@
           <Property Name="spotted" Type="int" Nullable="false" />
           <Property Name="capturePoints" Type="int" Nullable="false" />
           <Property Name="droppedCapturePoints" Type="int" Nullable="false" />
-          <Property Name="typeCompDescr" Type="int" />
+          <Property Name="typeCompDescr" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Players">
           <Key>
@@ -193,7 +193,7 @@
           <Property Name="spotted" Type="Int32" Nullable="false" />
           <Property Name="capturePoints" Type="Int32" Nullable="false" />
           <Property Name="droppedCapturePoints" Type="Int32" Nullable="false" />
-          <Property Name="typeCompDescr" Type="Int32" />
+          <Property Name="typeCompDescr" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>

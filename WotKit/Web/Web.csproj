@@ -183,6 +183,7 @@
     <Compile Include="Controllers\PlayerBattleController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\BattlesController.cs" />
+    <Compile Include="Controllers\TanksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,6 +248,11 @@
     <Content Include="Views\Battles\Index.cshtml" />
     <Content Include="Views\Battles\Recent.cshtml" />
     <Content Include="Views\Admin\Tanks.cshtml" />
+    <Content Include="Views\Tanks\Create.cshtml" />
+    <Content Include="Views\Tanks\Delete.cshtml" />
+    <Content Include="Views\Tanks\Details.cshtml" />
+    <Content Include="Views\Tanks\Edit.cshtml" />
+    <Content Include="Views\Tanks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -77,10 +77,13 @@ namespace Web.Controllers
                                     Kills = x.kills,
                                     Spotted = x.spotted,
                                     CapturePoints = x.capturePoints,
-                                    DroppedCapturePoints = x.droppedCapturePoints
+                                    DroppedCapturePoints = x.droppedCapturePoints,
+                                    TankId = x.typeCompDescr
                                 };
 
             model.Battles = playerBattles.ToList();
+
+            var tanks = db.Tanks.ToList();
 
             foreach (var battle in model.Battles)
             {
@@ -108,9 +111,30 @@ namespace Web.Controllers
                 {
                     battle.NetCreditsClass = "text-danger";
                 }
+
+                // Calculating WN8
+                // Step 1
+                var tank = tanks.Where(x => x.TankId == battle.TankId).Single();
+                double rDamage = (double)battle.DamageDealt / tank.ExpectedDamage;
+                double rSpot = (double)battle.Spotted / tank.ExpectedSpot;
+                double rFrag = (double)battle.Kills / tank.ExpectedFrag;
+                double rDef = (double)battle.DroppedCapturePoints / tank.ExpectedDefense;
+                double rWin = battle.Won ? tank.ExpectedWin : 0;
+                // Step 2
+                var rWINc =    Math.Max(0, (rWin    - 0.71) / (1 - 0.71));
+                var rDAMAGEc = Math.Max(0, (rDamage - 0.22) / (1 - 0.22));
+                var rFRAGc = Math.Max(0, Math.Min(rDAMAGEc + 0.2, (rFrag - 0.12) / (1 - 0.12)));
+                var rSPOTc = Math.Max(0, Math.Min(rDAMAGEc + 0.1, (rSpot - 0.38) / (1 - 0.38)));
+                var rDEFc = Math.Max(0, Math.Min(rDAMAGEc + 0.1, (rDef - 0.10) / (1 - 0.10)));
+                // Step 3
+                var wn8 = (980 * rDAMAGEc) + (210 * rDAMAGEc * rFRAGc) + (155 * rFRAGc * rSPOTc) + (75 * rDEFc * rFRAGc) + (145 * Math.Min(1.8, rWINc));
+
+                battle.WN8 = wn8;
             }
 
+            // Summary
             model.Summary.NetCredits = model.Battles.Sum(x => x.NetCredits);
+            
             
             return View(model);
         }

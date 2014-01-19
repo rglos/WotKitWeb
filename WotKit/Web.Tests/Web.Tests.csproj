@@ -107,7 +107,7 @@
     <Compile Include="Controllers\BattleResultFileControllerTest.cs" />
     <Compile Include="Services\AdminServiceTest.cs" />
     <Compile Include="Controllers\BattlesControllerTest.cs" />
-    <Compile Include="Controllers\ConvertBattleResultToJSONServiceTest.cs" />
+    <Compile Include="Services\ConvertBattleResultToJSONServiceTest.cs" />
     <Compile Include="Controllers\WargamingApiServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
