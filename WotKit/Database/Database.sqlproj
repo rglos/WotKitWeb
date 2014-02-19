@@ -69,6 +69,8 @@
     <Build Include="Tables\WotKit\Battles.sql" />
     <Build Include="Tables\WotKit\PlayerBattles.sql" />
     <Build Include="Tables\WotKit\Tanks.sql" />
+    <Build Include="Tables\WotKit\Clans.sql" />
+    <Build Include="Tables\WotKit\ClanDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\Local.publish.xml" />

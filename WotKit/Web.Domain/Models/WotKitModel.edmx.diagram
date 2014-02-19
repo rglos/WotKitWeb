@@ -12,6 +12,10 @@
         <AssociationConnector Association="WotKitModel.FK_PlayerBattles_Players" ManuallyRouted="false" />
         <AssociationConnector Association="WotKitModel.FK_Battles_Players" />
         <EntityTypeShape EntityType="WotKitModel.Tank" Width="1.75" PointX="8.375" PointY="0.875" />
+        <EntityTypeShape EntityType="WotKitModel.ClanDetail" Width="1.5" PointX="3.875" PointY="6.625" />
+        <EntityTypeShape EntityType="WotKitModel.Clan" Width="1.875" PointX="6" PointY="6.625" />
+        <AssociationConnector Association="WotKitModel.FK_ClanDetails_Clans" />
+        <AssociationConnector Association="WotKitModel.FK_ClanDetails_Players" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

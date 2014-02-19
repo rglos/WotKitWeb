@@ -12,21 +12,23 @@ namespace Web.Domain.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Player
+    public partial class Clan
     {
-        public Player()
+        public Clan()
         {
-            this.PlayerBattles = new HashSet<PlayerBattle>();
-            this.Battles = new HashSet<Battle>();
             this.ClanDetails = new HashSet<ClanDetail>();
         }
     
-        public int PlayerId { get; set; }
-        public int AccountDBID { get; set; }
+        public int ClanId { get; set; }
+        public string Abbreviation { get; set; }
         public string Name { get; set; }
+        public string EmblemLarge { get; set; }
+        public string EmblemSmall { get; set; }
+        public string EmblemBWTank { get; set; }
+        public string EmblemMedium { get; set; }
+        public System.DateTime CreatedAtDate { get; set; }
+        public System.DateTime UpdatedAtDate { get; set; }
     
-        public virtual ICollection<PlayerBattle> PlayerBattles { get; set; }
-        public virtual ICollection<Battle> Battles { get; set; }
         public virtual ICollection<ClanDetail> ClanDetails { get; set; }
     }
 }

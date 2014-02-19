@@ -26,7 +26,7 @@ namespace Web.Controllers
 
             // TODO: Use dependency injection to MapPath - http://stackoverflow.com/a/19563226
             //string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            string root = @"D:\Data\WoT\Temp";
+            string root = @"D:\Data\WoT\WoTKit\Queue";
             var provider = new MultipartFormDataStreamProvider(root);
 
             try
@@ -54,6 +54,7 @@ namespace Web.Controllers
                     var serverBattle = PostBattle(battle);
                     var playerBattle = BattleResultsParser.ParsePlayerBattle(json, serverPlayer, serverBattle);
                     var serverPlayerBattle = PostPlayerBattle(playerBattle);
+                    File.Move(newFilePath, Path.Combine(@"D:\Data\WoT\WoTKit\Processed", Path.GetFileName(newFilePath)));
                 }
 
                 // Process any additional form data

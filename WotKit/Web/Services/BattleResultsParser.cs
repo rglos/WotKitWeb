@@ -29,11 +29,11 @@ namespace Web.Services
             JObject jobject = JObject.Parse(json);
             var arenaUniqueId = (long)jobject["arenaUniqueID"];
             var parserTime = (long)jobject["parsertime"];
-            var parserDateTime = convertUnixTime(parserTime);
+            var parserDateTime = Utils.ConvertUnixTime(parserTime);
             var parserversion = (string)jobject["parserversion"];
 
             var common = (JObject)jobject["common"];
-            var arenaCreateTime = convertUnixTime((long)common["arenaCreateTime"]);
+            var arenaCreateTime = Utils.ConvertUnixTime((long)common["arenaCreateTime"]);
             var arenaTypeID = (int)common["arenaTypeID"];
             var arenaTypeIcon = (string)common["arenaTypeIcon"];
             var arenaTypeName = (string)common["arenaTypeName"];
@@ -120,13 +120,6 @@ namespace Web.Services
                 droppedCapturePoints = droppedCapturePoints,
                 typeCompDescr = typeCompDescr
             };
-        }
-
-        // http://code.google.com/p/wotstats/source/browse/trunk/WoTStats/WoTStats/Objects/BattleResultsObject.cs
-        private static DateTime convertUnixTime(long time)
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return epoch.AddSeconds(time);
         }
     }
 }

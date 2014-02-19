@@ -29,5 +29,7 @@ namespace Web.Domain.Models
         public virtual DbSet<PlayerBattle> PlayerBattles { get; set; }
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Tank> Tanks { get; set; }
+        public virtual DbSet<ClanDetail> ClanDetails { get; set; }
+        public virtual DbSet<Clan> Clans { get; set; }
     }
 }

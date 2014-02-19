@@ -21,6 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Clans", "Index", "Clans")</li>
                     <li>@Html.ActionLink("Battles", "Index", "Battles")</li>
                     <li>@Html.ActionLink("Tanks", "Tanks", "Admin")</li>
                     <li>@Html.ActionLink("AutoScaffoldTanks", "Index", "Tanks")</li>
@@ -42,6 +43,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/moment.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

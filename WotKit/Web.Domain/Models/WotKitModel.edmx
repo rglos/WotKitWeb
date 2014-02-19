@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WotKitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WotKitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Battles">
           <Key>
             <PropertyRef Name="BattleId" />
@@ -27,6 +27,35 @@
           <Property Name="WinnerTeam" Type="int" Nullable="false" />
           <Property Name="VehLockMode" Type="int" Nullable="false" />
           <Property Name="SubmittedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ClanDetails">
+          <Key>
+            <PropertyRef Name="ClanId" />
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="AsOfDate" />
+          </Key>
+          <Property Name="ClanId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="AsOfDate" Type="datetime" Nullable="false" />
+          <Property Name="ClanBattles" Type="int" Nullable="false" />
+          <Property Name="AllBattles" Type="int" Nullable="false" />
+          <Property Name="CompanyBattles" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rolei18n" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clans">
+          <Key>
+            <PropertyRef Name="ClanId" />
+          </Key>
+          <Property Name="ClanId" Type="int" Nullable="false" />
+          <Property Name="Abbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EmblemLarge" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemSmall" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemBWTank" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemMedium" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedAtDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAtDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="PlayerBattles">
           <Key>
@@ -94,6 +123,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClanDetails_Clans">
+          <End Role="Clans" Type="Self.Clans" Multiplicity="1" />
+          <End Role="ClanDetails" Type="Self.ClanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clans">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="ClanDetails">
+              <PropertyRef Name="ClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClanDetails_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="ClanDetails" Type="Self.ClanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="ClanDetails">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PlayerBattles_Battles">
           <End Role="Battles" Type="Self.Battles" Multiplicity="1" />
           <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
@@ -120,12 +173,22 @@
         </Association>
         <EntityContainer Name="WotKitModelStoreContainer">
           <EntitySet Name="Battles" EntityType="Self.Battles" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="ClanDetails" EntityType="Self.ClanDetails" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="Clans" EntityType="Self.Clans" Schema="WotKit" store:Type="Tables" />
           <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattles" Schema="WotKit" store:Type="Tables" />
           <EntitySet Name="Players" EntityType="Self.Players" Schema="WotKit" store:Type="Tables" />
           <EntitySet Name="Tanks" EntityType="Self.Tanks" Schema="WotKit" store:Type="Tables" />
           <AssociationSet Name="FK_Battles_Players" Association="Self.FK_Battles_Players">
             <End Role="Players" EntitySet="Players" />
             <End Role="Battles" EntitySet="Battles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Clans" Association="Self.FK_ClanDetails_Clans">
+            <End Role="Clans" EntitySet="Clans" />
+            <End Role="ClanDetails" EntitySet="ClanDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Players" Association="Self.FK_ClanDetails_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="ClanDetails" EntitySet="ClanDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
             <End Role="Battles" EntitySet="Battles" />
@@ -204,6 +267,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Players" FromRole="Players" ToRole="PlayerBattles" />
           <NavigationProperty Name="Battles" Relationship="WotKitModel.FK_Battles_Players" FromRole="Player" ToRole="Battle" />
+          <NavigationProperty Name="ClanDetails" Relationship="WotKitModel.FK_ClanDetails_Players" FromRole="Player" ToRole="ClanDetail" />
         </EntityType>
         <Association Name="FK_PlayerBattles_Battles">
           <End Role="Battles" Type="Self.Battle" Multiplicity="1" />
@@ -246,6 +310,16 @@
             <End Role="Battle" EntitySet="Battles" />
           </AssociationSet>
           <EntitySet Name="Tanks" EntityType="WotKitModel.Tank" />
+          <EntitySet Name="ClanDetails" EntityType="WotKitModel.ClanDetail" />
+          <EntitySet Name="Clans" EntityType="WotKitModel.Clan" />
+          <AssociationSet Name="FK_ClanDetails_Clans" Association="WotKitModel.FK_ClanDetails_Clans">
+            <End Role="Clan" EntitySet="Clans" />
+            <End Role="ClanDetail" EntitySet="ClanDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Players" Association="WotKitModel.FK_ClanDetails_Players">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="ClanDetail" EntitySet="ClanDetails" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Battles_Players">
           <End Type="WotKitModel.Player" Role="Player" Multiplicity="0..1" />
@@ -277,6 +351,62 @@
           <Property Name="ExpectedDefense" Type="Double" Nullable="false" />
           <Property Name="ExpectedWin" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="ClanDetail">
+          <Key>
+            <PropertyRef Name="ClanId" />
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="AsOfDate" />
+          </Key>
+          <Property Type="Int32" Name="ClanId" Nullable="false" />
+          <Property Type="Int32" Name="PlayerId" Nullable="false" />
+          <Property Type="DateTime" Name="AsOfDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="ClanBattles" Nullable="false" />
+          <Property Type="Int32" Name="AllBattles" Nullable="false" />
+          <NavigationProperty Name="Clan" Relationship="WotKitModel.FK_ClanDetails_Clans" FromRole="ClanDetail" ToRole="Clan" />
+          <NavigationProperty Name="Player" Relationship="WotKitModel.FK_ClanDetails_Players" FromRole="ClanDetail" ToRole="Player" />
+          <Property Name="CompanyBattles" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rolei18n" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clan">
+          <Key>
+            <PropertyRef Name="ClanId" />
+          </Key>
+          <Property Type="Int32" Name="ClanId" Nullable="false" />
+          <Property Type="String" Name="Abbreviation" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmblemLarge" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmblemSmall" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="EmblemBWTank" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="EmblemMedium" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClanDetails" Relationship="WotKitModel.FK_ClanDetails_Clans" FromRole="Clan" ToRole="ClanDetail" />
+          <Property Name="CreatedAtDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdatedAtDate" Type="DateTime" Precision="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClanDetails_Clans">
+          <End Type="WotKitModel.Clan" Role="Clan" Multiplicity="1" />
+          <End Type="WotKitModel.ClanDetail" Role="ClanDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clan">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="ClanDetail">
+              <PropertyRef Name="ClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClanDetails_Players">
+          <End Type="WotKitModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="WotKitModel.ClanDetail" Role="ClanDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="ClanDetail">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -360,6 +490,35 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Nation" ColumnName="Nation" />
                 <ScalarProperty Name="TankId" ColumnName="TankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClanDetails">
+            <EntityTypeMapping TypeName="WotKitModel.ClanDetail">
+              <MappingFragment StoreEntitySet="ClanDetails">
+                <ScalarProperty Name="Rolei18n" ColumnName="Rolei18n" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CompanyBattles" ColumnName="CompanyBattles" />
+                <ScalarProperty Name="AllBattles" ColumnName="AllBattles" />
+                <ScalarProperty Name="ClanBattles" ColumnName="ClanBattles" />
+                <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ClanId" ColumnName="ClanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clans">
+            <EntityTypeMapping TypeName="WotKitModel.Clan">
+              <MappingFragment StoreEntitySet="Clans">
+                <ScalarProperty Name="UpdatedAtDate" ColumnName="UpdatedAtDate" />
+                <ScalarProperty Name="CreatedAtDate" ColumnName="CreatedAtDate" />
+                <ScalarProperty Name="EmblemMedium" ColumnName="EmblemMedium" />
+                <ScalarProperty Name="EmblemBWTank" ColumnName="EmblemBWTank" />
+                <ScalarProperty Name="EmblemSmall" ColumnName="EmblemSmall" />
+                <ScalarProperty Name="EmblemLarge" ColumnName="EmblemLarge" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="ClanId" ColumnName="ClanId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

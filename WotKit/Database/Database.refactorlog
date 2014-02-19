@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DamageReceived" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a54f8288-6b3c-4c48-8d08-931a1816e88b" ChangeDateTime="02/13/2014 21:18:24">
+    <Property Name="ElementName" Value="[WotKit].[ClanDetails].[TeamBattles]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WotKit].[ClanDetails]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyBattles" />
+  </Operation>
 </Operations>

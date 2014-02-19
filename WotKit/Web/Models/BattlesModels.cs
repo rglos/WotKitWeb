@@ -85,5 +85,9 @@ namespace Web.Models
     {
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public int NetCredits { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public int DamageDealt { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public int AverageDamageDealt { get; set; }
     }
 }
