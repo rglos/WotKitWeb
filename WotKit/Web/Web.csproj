@@ -278,9 +278,6 @@
     <Content Include="Views\Tanks\Details.cshtml" />
     <Content Include="Views\Tanks\Edit.cshtml" />
     <Content Include="Views\Tanks\Index.cshtml" />
-    <Content Include="UserSettings.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Clans\Index.cshtml" />
     <Content Include="Views\Clans\Details.cshtml" />
   </ItemGroup>
