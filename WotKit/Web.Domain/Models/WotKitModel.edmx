@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WotKitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Battles">
+          <Key>
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="BattleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArenaUniqueId" Type="bigint" Nullable="false" />
+          <Property Name="ParserVersion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ArenaCreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ArenaTypeId" Type="int" Nullable="false" />
+          <Property Name="ArenaTypeIcon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ArenaTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BonusType" Type="int" Nullable="false" />
+          <Property Name="BonusTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Duration" Type="float" Nullable="false" />
+          <Property Name="FinishReason" Type="int" Nullable="false" />
+          <Property Name="FinishReasonName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="GameplayId" Type="int" Nullable="false" />
+          <Property Name="GameplayName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WinnerTeam" Type="int" Nullable="false" />
+          <Property Name="VehLockMode" Type="int" Nullable="false" />
+          <Property Name="SubmittedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ClanDetails">
+          <Key>
+            <PropertyRef Name="ClanId" />
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="AsOfDate" />
+          </Key>
+          <Property Name="ClanId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="AsOfDate" Type="datetime" Nullable="false" />
+          <Property Name="ClanBattles" Type="int" Nullable="false" />
+          <Property Name="AllBattles" Type="int" Nullable="false" />
+          <Property Name="CompanyBattles" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rolei18n" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clans">
+          <Key>
+            <PropertyRef Name="ClanId" />
+          </Key>
+          <Property Name="ClanId" Type="int" Nullable="false" />
+          <Property Name="Abbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EmblemLarge" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemSmall" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemBWTank" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmblemMedium" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedAtDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAtDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerBattles">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="BattleId" Type="int" Nullable="false" />
+          <Property Name="DamageDealt" Type="int" Nullable="false" />
+          <Property Name="DamageReceived" Type="int" Nullable="false" />
+          <Property Name="TankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="XP" Type="int" Nullable="false" />
+          <Property Name="XPPenalty" Type="int" Nullable="false" />
+          <Property Name="tmenXP" Type="int" Nullable="false" />
+          <Property Name="freeXP" Type="int" Nullable="false" />
+          <Property Name="eventXP" Type="int" Nullable="false" />
+          <Property Name="eventTMenXP" Type="int" Nullable="false" />
+          <Property Name="eventFreeXP" Type="int" Nullable="false" />
+          <Property Name="credits" Type="int" Nullable="false" />
+          <Property Name="autoRepairCost" Type="int" Nullable="false" />
+          <Property Name="autoEquipCost" Type="int" Nullable="false" />
+          <Property Name="autoLoadCost" Type="int" Nullable="false" />
+          <Property Name="won" Type="bit" Nullable="false" />
+          <Property Name="kills" Type="int" Nullable="false" />
+          <Property Name="spotted" Type="int" Nullable="false" />
+          <Property Name="capturePoints" Type="int" Nullable="false" />
+          <Property Name="droppedCapturePoints" Type="int" Nullable="false" />
+          <Property Name="typeCompDescr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountDBID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tanks">
+          <Key>
+            <PropertyRef Name="TankId" />
+          </Key>
+          <Property Name="TankId" Type="int" Nullable="false" />
+          <Property Name="Nation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsPremium" Type="bit" Nullable="false" />
+          <Property Name="Namei18n" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nationi18n" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TankType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpectedFrag" Type="float" Nullable="false" />
+          <Property Name="ExpectedDamage" Type="float" Nullable="false" />
+          <Property Name="ExpectedSpot" Type="float" Nullable="false" />
+          <Property Name="ExpectedDefense" Type="float" Nullable="false" />
+          <Property Name="ExpectedWin" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Battles_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+          <End Role="Battles" Type="Self.Battles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Battles">
+              <PropertyRef Name="SubmittedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClanDetails_Clans">
+          <End Role="Clans" Type="Self.Clans" Multiplicity="1" />
+          <End Role="ClanDetails" Type="Self.ClanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clans">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="ClanDetails">
+              <PropertyRef Name="ClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClanDetails_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="ClanDetails" Type="Self.ClanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="ClanDetails">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerBattles_Battles">
+          <End Role="Battles" Type="Self.Battles" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Battles">
+              <PropertyRef Name="BattleId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="BattleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerBattles_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WotKitModelStoreContainer">
+          <EntitySet Name="Battles" EntityType="Self.Battles" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="ClanDetails" EntityType="Self.ClanDetails" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="Clans" EntityType="Self.Clans" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattles" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="WotKit" store:Type="Tables" />
+          <EntitySet Name="Tanks" EntityType="Self.Tanks" Schema="WotKit" store:Type="Tables" />
+          <AssociationSet Name="FK_Battles_Players" Association="Self.FK_Battles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="Battles" EntitySet="Battles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Clans" Association="Self.FK_ClanDetails_Clans">
+            <End Role="Clans" EntitySet="Clans" />
+            <End Role="ClanDetails" EntitySet="ClanDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Players" Association="Self.FK_ClanDetails_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="ClanDetails" EntitySet="ClanDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
+            <End Role="Battles" EntitySet="Battles" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerBattles_Players" Association="Self.FK_PlayerBattles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WotKitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Battle">
+          <Key>
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="BattleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArenaUniqueId" Type="Int64" Nullable="false" />
+          <Property Name="ParserVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArenaCreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArenaTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ArenaTypeIcon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArenaTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BonusType" Type="Int32" Nullable="false" />
+          <Property Name="BonusTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Duration" Type="Double" Nullable="false" />
+          <Property Name="FinishReason" Type="Int32" Nullable="false" />
+          <Property Name="FinishReasonName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GameplayId" Type="Int32" Nullable="false" />
+          <Property Name="GameplayName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WinnerTeam" Type="Int32" Nullable="false" />
+          <Property Name="VehLockMode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Battles" FromRole="Battles" ToRole="PlayerBattles" />
+          <Property Name="SubmittedBy" Type="Int32" />
+          <NavigationProperty Name="Player" Relationship="WotKitModel.FK_Battles_Players" FromRole="Battle" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="PlayerBattle">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="BattleId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="BattleId" Type="Int32" Nullable="false" />
+          <Property Name="DamageDealt" Type="Int32" Nullable="false" />
+          <Property Name="DamageReceived" Type="Int32" Nullable="false" />
+          <Property Name="TankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XP" Type="Int32" Nullable="false" />
+          <Property Name="XPPenalty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Battle" Relationship="Self.FK_PlayerBattles_Battles" FromRole="PlayerBattles" ToRole="Battles" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerBattles_Players" FromRole="PlayerBattles" ToRole="Players" />
+          <Property Name="tmenXP" Type="Int32" Nullable="false" />
+          <Property Name="freeXP" Type="Int32" Nullable="false" />
+          <Property Name="eventXP" Type="Int32" Nullable="false" />
+          <Property Name="eventTMenXP" Type="Int32" Nullable="false" />
+          <Property Name="eventFreeXP" Type="Int32" Nullable="false" />
+          <Property Name="credits" Type="Int32" Nullable="false" />
+          <Property Name="autoRepairCost" Type="Int32" Nullable="false" />
+          <Property Name="autoEquipCost" Type="Int32" Nullable="false" />
+          <Property Name="autoLoadCost" Type="Int32" Nullable="false" />
+          <Property Name="won" Type="Boolean" Nullable="false" />
+          <Property Name="kills" Type="Int32" Nullable="false" />
+          <Property Name="spotted" Type="Int32" Nullable="false" />
+          <Property Name="capturePoints" Type="Int32" Nullable="false" />
+          <Property Name="droppedCapturePoints" Type="Int32" Nullable="false" />
+          <Property Name="typeCompDescr" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountDBID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlayerBattles" Relationship="Self.FK_PlayerBattles_Players" FromRole="Players" ToRole="PlayerBattles" />
+          <NavigationProperty Name="Battles" Relationship="WotKitModel.FK_Battles_Players" FromRole="Player" ToRole="Battle" />
+          <NavigationProperty Name="ClanDetails" Relationship="WotKitModel.FK_ClanDetails_Players" FromRole="Player" ToRole="ClanDetail" />
+        </EntityType>
+        <Association Name="FK_PlayerBattles_Battles">
+          <End Role="Battles" Type="Self.Battle" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Battles">
+              <PropertyRef Name="BattleId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="BattleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerBattles_Players">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerBattles" Type="Self.PlayerBattle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerBattles">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WotKitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Battles" EntityType="Self.Battle" />
+          <EntitySet Name="PlayerBattles" EntityType="Self.PlayerBattle" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <AssociationSet Name="FK_PlayerBattles_Battles" Association="Self.FK_PlayerBattles_Battles">
+            <End Role="Battles" EntitySet="Battles" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerBattles_Players" Association="Self.FK_PlayerBattles_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerBattles" EntitySet="PlayerBattles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Battles_Players" Association="WotKitModel.FK_Battles_Players">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Battle" EntitySet="Battles" />
+          </AssociationSet>
+          <EntitySet Name="Tanks" EntityType="WotKitModel.Tank" />
+          <EntitySet Name="ClanDetails" EntityType="WotKitModel.ClanDetail" />
+          <EntitySet Name="Clans" EntityType="WotKitModel.Clan" />
+          <AssociationSet Name="FK_ClanDetails_Clans" Association="WotKitModel.FK_ClanDetails_Clans">
+            <End Role="Clan" EntitySet="Clans" />
+            <End Role="ClanDetail" EntitySet="ClanDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClanDetails_Players" Association="WotKitModel.FK_ClanDetails_Players">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="ClanDetail" EntitySet="ClanDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Battles_Players">
+          <End Type="WotKitModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="WotKitModel.Battle" Role="Battle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Battle">
+              <PropertyRef Name="SubmittedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tank">
+          <Key>
+            <PropertyRef Name="TankId" />
+          </Key>
+          <Property Name="TankId" Type="Int32" Nullable="false" />
+          <Property Name="Nation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsPremium" Type="Boolean" Nullable="false" />
+          <Property Name="Namei18n" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nationi18n" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TankType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedFrag" Type="Double" Nullable="false" />
+          <Property Name="ExpectedDamage" Type="Double" Nullable="false" />
+          <Property Name="ExpectedSpot" Type="Double" Nullable="false" />
+          <Property Name="ExpectedDefense" Type="Double" Nullable="false" />
+          <Property Name="ExpectedWin" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClanDetail">
+          <Key>
+            <PropertyRef Name="ClanId" />
+            <PropertyRef Name="PlayerId" />
+            <PropertyRef Name="AsOfDate" />
+          </Key>
+          <Property Type="Int32" Name="ClanId" Nullable="false" />
+          <Property Type="Int32" Name="PlayerId" Nullable="false" />
+          <Property Type="DateTime" Name="AsOfDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="ClanBattles" Nullable="false" />
+          <Property Type="Int32" Name="AllBattles" Nullable="false" />
+          <NavigationProperty Name="Clan" Relationship="WotKitModel.FK_ClanDetails_Clans" FromRole="ClanDetail" ToRole="Clan" />
+          <NavigationProperty Name="Player" Relationship="WotKitModel.FK_ClanDetails_Players" FromRole="ClanDetail" ToRole="Player" />
+          <Property Name="CompanyBattles" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rolei18n" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clan">
+          <Key>
+            <PropertyRef Name="ClanId" />
+          </Key>
+          <Property Type="Int32" Name="ClanId" Nullable="false" />
+          <Property Type="String" Name="Abbreviation" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmblemLarge" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmblemSmall" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="EmblemBWTank" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="EmblemMedium" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClanDetails" Relationship="WotKitModel.FK_ClanDetails_Clans" FromRole="Clan" ToRole="ClanDetail" />
+          <Property Name="CreatedAtDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdatedAtDate" Type="DateTime" Precision="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClanDetails_Clans">
+          <End Type="WotKitModel.Clan" Role="Clan" Multiplicity="1" />
+          <End Type="WotKitModel.ClanDetail" Role="ClanDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clan">
+              <PropertyRef Name="ClanId" />
+            </Principal>
+            <Dependent Role="ClanDetail">
+              <PropertyRef Name="ClanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClanDetails_Players">
+          <End Type="WotKitModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="WotKitModel.ClanDetail" Role="ClanDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="ClanDetail">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WotKitModelStoreContainer" CdmEntityContainer="WotKitEntities">
+          <EntitySetMapping Name="Battles">
+            <EntityTypeMapping TypeName="WotKitModel.Battle">
+              <MappingFragment StoreEntitySet="Battles">
+                <ScalarProperty Name="SubmittedBy" ColumnName="SubmittedBy" />
+                <ScalarProperty Name="BattleId" ColumnName="BattleId" />
+                <ScalarProperty Name="ArenaUniqueId" ColumnName="ArenaUniqueId" />
+                <ScalarProperty Name="ParserVersion" ColumnName="ParserVersion" />
+                <ScalarProperty Name="ArenaCreateTime" ColumnName="ArenaCreateTime" />
+                <ScalarProperty Name="ArenaTypeId" ColumnName="ArenaTypeId" />
+                <ScalarProperty Name="ArenaTypeIcon" ColumnName="ArenaTypeIcon" />
+                <ScalarProperty Name="ArenaTypeName" ColumnName="ArenaTypeName" />
+                <ScalarProperty Name="BonusType" ColumnName="BonusType" />
+                <ScalarProperty Name="BonusTypeName" ColumnName="BonusTypeName" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="FinishReason" ColumnName="FinishReason" />
+                <ScalarProperty Name="FinishReasonName" ColumnName="FinishReasonName" />
+                <ScalarProperty Name="GameplayId" ColumnName="GameplayId" />
+                <ScalarProperty Name="GameplayName" ColumnName="GameplayName" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="WinnerTeam" ColumnName="WinnerTeam" />
+                <ScalarProperty Name="VehLockMode" ColumnName="VehLockMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerBattles">
+            <EntityTypeMapping TypeName="WotKitModel.PlayerBattle">
+              <MappingFragment StoreEntitySet="PlayerBattles">
+                <ScalarProperty Name="typeCompDescr" ColumnName="typeCompDescr" />
+                <ScalarProperty Name="droppedCapturePoints" ColumnName="droppedCapturePoints" />
+                <ScalarProperty Name="capturePoints" ColumnName="capturePoints" />
+                <ScalarProperty Name="spotted" ColumnName="spotted" />
+                <ScalarProperty Name="kills" ColumnName="kills" />
+                <ScalarProperty Name="won" ColumnName="won" />
+                <ScalarProperty Name="autoLoadCost" ColumnName="autoLoadCost" />
+                <ScalarProperty Name="autoEquipCost" ColumnName="autoEquipCost" />
+                <ScalarProperty Name="autoRepairCost" ColumnName="autoRepairCost" />
+                <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="eventFreeXP" ColumnName="eventFreeXP" />
+                <ScalarProperty Name="eventTMenXP" ColumnName="eventTMenXP" />
+                <ScalarProperty Name="eventXP" ColumnName="eventXP" />
+                <ScalarProperty Name="freeXP" ColumnName="freeXP" />
+                <ScalarProperty Name="tmenXP" ColumnName="tmenXP" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="BattleId" ColumnName="BattleId" />
+                <ScalarProperty Name="DamageDealt" ColumnName="DamageDealt" />
+                <ScalarProperty Name="DamageReceived" ColumnName="DamageReceived" />
+                <ScalarProperty Name="TankName" ColumnName="TankName" />
+                <ScalarProperty Name="XP" ColumnName="XP" />
+                <ScalarProperty Name="XPPenalty" ColumnName="XPPenalty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="WotKitModel.Player">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="AccountDBID" ColumnName="AccountDBID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tanks">
+            <EntityTypeMapping TypeName="WotKitModel.Tank">
+              <MappingFragment StoreEntitySet="Tanks">
+                <ScalarProperty Name="ExpectedWin" ColumnName="ExpectedWin" />
+                <ScalarProperty Name="ExpectedDefense" ColumnName="ExpectedDefense" />
+                <ScalarProperty Name="ExpectedSpot" ColumnName="ExpectedSpot" />
+                <ScalarProperty Name="ExpectedDamage" ColumnName="ExpectedDamage" />
+                <ScalarProperty Name="ExpectedFrag" ColumnName="ExpectedFrag" />
+                <ScalarProperty Name="TankType" ColumnName="TankType" />
+                <ScalarProperty Name="Nationi18n" ColumnName="Nationi18n" />
+                <ScalarProperty Name="Namei18n" ColumnName="Namei18n" />
+                <ScalarProperty Name="IsPremium" ColumnName="IsPremium" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Nation" ColumnName="Nation" />
+                <ScalarProperty Name="TankId" ColumnName="TankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClanDetails">
+            <EntityTypeMapping TypeName="WotKitModel.ClanDetail">
+              <MappingFragment StoreEntitySet="ClanDetails">
+                <ScalarProperty Name="Rolei18n" ColumnName="Rolei18n" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CompanyBattles" ColumnName="CompanyBattles" />
+                <ScalarProperty Name="AllBattles" ColumnName="AllBattles" />
+                <ScalarProperty Name="ClanBattles" ColumnName="ClanBattles" />
+                <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ClanId" ColumnName="ClanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clans">
+            <EntityTypeMapping TypeName="WotKitModel.Clan">
+              <MappingFragment StoreEntitySet="Clans">
+                <ScalarProperty Name="UpdatedAtDate" ColumnName="UpdatedAtDate" />
+                <ScalarProperty Name="CreatedAtDate" ColumnName="CreatedAtDate" />
+                <ScalarProperty Name="EmblemMedium" ColumnName="EmblemMedium" />
+                <ScalarProperty Name="EmblemBWTank" ColumnName="EmblemBWTank" />
+                <ScalarProperty Name="EmblemSmall" ColumnName="EmblemSmall" />
+                <ScalarProperty Name="EmblemLarge" ColumnName="EmblemLarge" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="ClanId" ColumnName="ClanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,53 @@
+﻿@model Web.Models.ClanDetailModel
+
+@{
+    ViewBag.Title = string.Format("[{0}] {1}", Model.Abbreviation, Model.Name);
+}
+
+<h2><img src="@Model.EmblemSmall" /> @ViewBag.Title</h2>
+
+<p>As of <span data-moment="true">@Model.AsOfDate.ToString("o")</span></p>
+
+<p>Members: @Model.ClanMembers.Count</p>
+<table class="table table-nonfluid table-condensed table-hover table-bordered">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Position</td>
+            <td>AllBattles</td>
+            <td>ClanBattles</td>
+            <td>CompanyBattles</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ClanMembers.Count == 0)
+        {
+            <tr><td colspan="4">No members...</td></tr>
+        }
+        
+        @foreach (var item in Model.ClanMembers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Position)</td>
+                <td>@Html.DisplayFor(modelItem => item.AllBattles)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClanBattles)</td>
+                <td>@Html.DisplayFor(modelItem => item.CompanyBattles)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("span[data-moment=true]").each(function (index, el) {
+                var text = $(this).text();
+                var newText = moment.utc(text).local().calendar() + " (" + moment.utc(text).local().fromNow() + ")";
+                $(this).text(newText);
+            });
+
+        });
+    </script>
+}

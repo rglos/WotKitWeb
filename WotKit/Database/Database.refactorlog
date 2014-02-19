@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="d6017c4a-6ad8-4c78-87a2-a4d388e49f3e" ChangeDateTime="12/24/2013 07:07:55">
+    <Property Name="ElementName" Value="[WotKit].[Players].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WotKit].[Players]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlayerId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5a9c2dbb-836b-4095-a8aa-2b5cff1b88ee" ChangeDateTime="12/24/2013 07:08:09">
+    <Property Name="ElementName" Value="[dbo].[Battles].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Battles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BattleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="da10c707-d0ee-42e6-b586-9cb3f891aafc" ChangeDateTime="12/24/2013 07:26:32">
+    <Property Name="ElementName" Value="[dbo].[PlayerBattle].[damageDealt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PlayerBattle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DamageDealt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="56ecfedd-22e1-49bb-806b-efd7dec3af8b" ChangeDateTime="12/24/2013 07:26:36">
+    <Property Name="ElementName" Value="[dbo].[PlayerBattle].[damageReceived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PlayerBattle]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DamageReceived" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a54f8288-6b3c-4c48-8d08-931a1816e88b" ChangeDateTime="02/13/2014 21:18:24">
+    <Property Name="ElementName" Value="[WotKit].[ClanDetails].[TeamBattles]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[WotKit].[ClanDetails]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanyBattles" />
+  </Operation>
+</Operations>

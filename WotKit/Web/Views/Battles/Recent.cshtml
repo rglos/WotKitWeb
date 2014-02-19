@@ -1,0 +1,161 @@
+﻿@model Web.Models.RecentBattlesModel
+
+@{
+    ViewBag.Title = "Recent Battles";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Recent Battles</h2>
+    </div>
+</div>
+
+@if (!Model.DisplayBattles)
+{
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        @Model.Message
+    </div>
+}
+else
+{
+    if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    @Model.Message
+                </div>
+            </div>
+        </div>
+    }
+
+    @* // TODO: Wrap this in a check for authentication and that the current user is the same as the user being viewed - other users shouldn't be able to start someone elses session *@
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("StartNewSession", "Battles", FormMethod.Post, new { @class = "form-inline", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Name)
+                <button type="submit" class="btn btn-default">Start New Session</button>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h3>@Html.DisplayFor(m => m.Name) - @Html.DisplayFor(m => m.AccountDBID)</h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>UTC Date</th>
+                        <th>Tank</th>
+                        <th>Map</th>
+                        <th>Status</th>
+                        <th>Damage Dealt</th>
+                        @*<th>Damage Received</th>*@
+                        <th>Net Credits</th>
+                        @*<th>eventFreeXP</th>
+                            <th>eventTMenXP</th>
+                            <th>eventXP</th>*@
+
+                        <th>XP</th>
+                        <th>Crew XP</th>
+                        <th>Free XP</th>
+                        @*<th>XPPenalty</th>*@
+                        <th>WN8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Battles)
+                    {
+                        <tr>
+                            <td>@item.BattleDate</td>
+                            <td>@item.Tank</td>
+                            <td>@Html.DisplayFor(x => item.Map)</td>
+                            <td class="@item.StatusClass"><span class="@item.StatusTextClass">@item.Status</span></td>
+                            <td class="text-right">@Html.DisplayFor(x => item.DamageDealt)</td>
+                            @*<td>@item.DamageReceived</td>*@
+                            <td class="text-right">
+                                <span class="@item.NetCreditsClass netcredits" data-toggle="popover" data-equip="@Html.DisplayFor(x => item.autoEquipCost)" data-repair="@Html.DisplayFor(x => item.autoRepairCost)" data-ammo="@Html.DisplayFor(x => item.autoLoadCost)" data-credits="@Html.DisplayFor(x => item.credits)">
+                                    @Html.DisplayFor(x => item.NetCredits)
+                                </span>
+                            </td>
+                            @*<td>@item.eventFreeXP</td>
+                                <td>@item.eventTMenXP</td>
+                                <td>@item.eventXP</td>*@
+
+                            <td class="text-right">@Html.DisplayFor(x => item.XP)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.tmenXP)</td>
+                            <td class="text-right">@Html.DisplayFor(x => item.freeXP)</td>
+                            @*<td>@item.XPPenalty</td>*@
+                            <td class="text-right">
+                                <span class="wn8" data-toggle="popover" data-kills="@Html.DisplayFor(x => item.Kills)" data-spotted="@Html.DisplayFor(x => item.Spotted)" data-capturepoints="@Html.DisplayFor(x => item.CapturePoints)" data-droppedcapturepoints="@Html.DisplayFor(x => item.DroppedCapturePoints)">@Html.DisplayFor(x => item.WN8)</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">@Html.DisplayFor(m => Model.Summary.DamageDealt)<br />Avg: @Html.DisplayFor(m => Model.Summary.AverageDamageDealt)</td>
+                        <td class="text-right">@Html.DisplayFor(m => Model.Summary.NetCredits)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            $(".netcredits").each(function () {
+                var table = "<table>" +
+                            "<tr><td>Received</td><td class='text-right'>" + $(this).attr('data-credits') + "</td></tr>" +
+                            "<tr><td>Auto-repair vehicle</td><td class='text-right text-danger'>" + $(this).attr('data-repair') + "</td></tr>" +
+                            "<tr><td>Auto-resupply ammunition</td><td class='text-right text-danger'>" + $(this).attr('data-ammo') + "</td></tr>" +
+                            "<tr><td>Auto-resupply consumables</td><td class='text-right text-danger'>" + $(this).attr('data-equip') + "</td></tr>" +
+                            "</table>";
+                //console.log($(this).attr('data-credits'));
+                $(this).attr("title", table);
+            });
+
+            $(".wn8").each(function () {
+                var table = "<table>" +
+                            "<tr><td>Kills</td><td class='text-right'>" + $(this).attr('data-kills') + "</td></tr>" +
+                            "<tr><td>Spotted</td><td class='text-right'>" + $(this).attr('data-spotted') + "</td></tr>" +
+                            "<tr><td>Capture Points</td><td class='text-right'>" + $(this).attr('data-capturepoints') + "</td></tr>" +
+                            "<tr><td>Defense Points</td><td class='text-right'>" + $(this).attr('data-droppedcapturepoints') + "</td></tr>" +
+                            "</table>";
+                $(this).attr("title", table);
+            });
+
+            $("[data-toggle=popover]").popover({ 'placement': 'left', 'html': true, 'trigger': 'hover' });
+
+
+        });
+    </script>
+}
+
+

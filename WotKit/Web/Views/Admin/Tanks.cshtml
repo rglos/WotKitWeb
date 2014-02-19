@@ -1,0 +1,45 @@
+﻿@model Web.Models.TanksIndexModel
+
+@{
+    ViewBag.Title = "Tanks";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h2>@ViewBag.Title</h2>
+
+        <p>The list of tanks comes from the World of Tanks 
+        Developer API <a href="https://na.wargaming.net/developers/api_reference/wot/encyclopedia/tanks/" target="_blank">List of Vehicles</a>. 
+        The values expected efficiency values come from <a href="http://wiki.wnefficiency.net/pages/WN8#Expected_Stats_Matrix" target="_blank">WN8 Expected Stats Matrix</a></p>
+
+        <table class="table table-nonfluid table-condensed table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Nation</th>
+                    <th>Class</th>
+                    <th>Tier</th>
+                    <th>ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Tanks.Count; i++)
+                {
+                    var number = i + 1;
+                    <tr>
+                        <td>@number</td>
+                        <td>@Html.ActionLink(Model.Tanks[i].Name, "Details", "Tanks", new { id = Model.Tanks[i].TankId }, null)</td>
+                        <td>@Model.Tanks[i].Nation</td>
+                        <td>@Model.Tanks[i].TankType</td>
+                        <td>@Model.Tanks[i].Level</td>
+                        <td>@Model.Tanks[i].TankId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

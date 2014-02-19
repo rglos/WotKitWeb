@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Web.Domain.Models.Tank>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPremium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Namei18n)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationi18n)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TankType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedFrag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedDamage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedSpot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedDefense)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedWin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPremium)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Namei18n)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nationi18n)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TankType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedFrag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedDamage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedSpot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedDefense)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedWin)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.TankId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TankId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TankId })*@
+            @Html.ActionLink("Details", "Details", new { id = item.TankId })
+        </td>
+    </tr>
+}
+
+</table>

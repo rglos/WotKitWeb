@@ -1,0 +1,32 @@
+﻿@model Web.Models.BattlesIndexModel
+
+@{
+    ViewBag.Title = "Recent Battles";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h2>Players with Recent Battles</h2>
+
+        <table class="table table-nonfluid table-condensed table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Recent Battles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Rows)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(item.Player, "Recent", new { id = item.Player })</td>
+                        <td>@item.RecentBattlesCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

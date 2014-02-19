@@ -1,0 +1,120 @@
+﻿@model Web.Domain.Models.Tank
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tank</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPremium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPremium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Namei18n)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Namei18n)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationi18n)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationi18n)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TankType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TankType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedFrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedFrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedSpot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedSpot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedDefense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedDefense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedWin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedWin)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

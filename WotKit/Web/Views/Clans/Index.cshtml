@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Web.Models.ClanModel>
+
+@{
+    ViewBag.Title = "Clans";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-nonfluid table-condensed table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ClanId)</th>
+            <th>@Html.DisplayNameFor(model => model.Abbreviation)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>Emblems</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedAtDate)</th>
+            <th>@Html.DisplayNameFor(model => model.UpdatedAtDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr><td colspan="4">No clans...</td></tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ClanId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Abbreviation)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>
+@*                    small - 24x24
+                    <a href="@item.EmblemSmall" class="thumbnail" target="_blank">
+                        <img src="@item.EmblemSmall" data-src="holder.js/24x24" alt="..." />
+                    </a>
+                    medium - 32x32
+                    <a href="@item.EmblemMedium" class="thumbnail" target="_blank">
+                        <img src="@item.EmblemMedium" data-src="holder.js/32x32" alt="..." />
+                    </a>
+                    large - 64x64
+                    <a href="@item.EmblemLarge" class="thumbnail" target="_blank">
+                        <img src="@item.EmblemLarge" data-src="holder.js/64x64" alt="..." />
+                    </a>
+                    bw_tank - 64x64
+                    <a href="@item.EmblemBWTank" class="thumbnail" target="_blank">
+                        <img src="@item.EmblemBWTank" data-src="holder.js/64x64" alt="..." />
+                    </a>*@
+                    <img src="@item.EmblemSmall" alt="small emblem" class="img-thumbnail" />
+                    <img src="@item.EmblemMedium" alt="medium emblem" class="img-thumbnail" />
+                    <img src="@item.EmblemLarge" alt="large emblem" class="img-thumbnail"/>
+                    <img src="@item.EmblemBWTank" alt="bw_tank emblem" class="img-thumbnail" />
+                </td>
+                <td><span data-moment="true">@item.CreatedAtDate.ToString("o")</span></td>
+                <td><span data-moment="true">@item.UpdatedAtDate.ToString("o")</span></td>
+                <td>@Html.ActionLink("Details", "Details", new { id = item.ClanId })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("span[data-moment=true]").each(function (index, el) {
+                var text = $(this).text();
+                var newText = moment.utc(text).local().calendar() + " (" + moment.utc(text).local().fromNow() + ")";
+                $(this).text(newText);
+            });
+
+        });
+    </script>
+}
